@@ -17,3 +17,13 @@
 .color5 {
     color: #f0e8f6;
 }
+
+body {
+    background-color: #211e30;
+}
+
+.bg-cp {
+    background-color: #f0e8f6;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
