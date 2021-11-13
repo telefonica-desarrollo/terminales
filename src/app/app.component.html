@@ -16,15 +16,14 @@
     </div>
     <div class="row bg-cp mt-4 mx-1 rounded">
         <div class="col-12 mt-3 d-sm-flex align-items-center justify-content-between" *ngIf="tiendaSeleccionada">
-            <h2 class="d-block d-sm-none">{{tiendaSeleccionada.TIENDA}}d </h2>
-            <hr class="d-block d-sm-none">
-            <h1 class="d-none d-sm-flex">{{tiendaSeleccionada.TIENDA}} </h1>
+            <h2 class="d-block d-sm-none strong">{{tiendaSeleccionada.TIENDA}}</h2>
+            <h1 class="d-none d-sm-flex strong">{{tiendaSeleccionada.TIENDA}} </h1>
             <div class="d-flex">
                 <h3 class="mx-sm-2 badge bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h3>
                 <h3 class="ms-1 badge bg-secondary">{{tiendaSeleccionada.IDPDV}}</h3>
             </div>
         </div>
-        <hr class="d-none d-sm-block">
+        <hr>
         <div class="col-12 mb-5">
 
         </div>
