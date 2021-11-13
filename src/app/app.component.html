@@ -1,9 +1,10 @@
 <div class="container">
-    <div class="row mt-2 mx-1">
-        <div class="col-12 col-md-5 bg-cp">
+    <div class="row mx-1 mt-5">
+        <div class="col-12 col-md-5 bg-cp rounded pt-2">
+            <p class="text-muted">Ingrese lo siguiente: </p>
             <mat-form-field class="example-full-width w-100" appearance="fill">
-                <mat-label>State</mat-label>
-                <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+                <mat-label>IDPDV</mat-label>
+                <input matInput aria-label="IDPDV" [matAutocomplete]="auto" [formControl]="stateCtrl">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let tienda of filtroTiendas | async" [value]="tienda.IDPDV">
                         <span>{{tienda.IDPDV}}</span> |
@@ -14,40 +15,11 @@
         </div>
     </div>
     <div class="row bg-cp mt-2 mx-1">
-        <div class="col-12">
+        <div class="col-12" *ngIf="tiendaSeleccionada">
             <h1>Hola Mundo</h1>
         </div>
         <div class="col-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+
         </div>
 
     </div>
