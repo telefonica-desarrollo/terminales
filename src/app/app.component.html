@@ -16,17 +16,32 @@
     </div>
     <div class="row bg-cp mt-4 mx-1 rounded">
         <div class="col-12 mt-3 d-sm-flex align-items-center justify-content-between" *ngIf="tiendaSeleccionada">
-            <h2 class="d-block d-sm-none strong">{{tiendaSeleccionada.TIENDA}}</h2>
-            <h1 class="d-none d-sm-flex strong">{{tiendaSeleccionada.TIENDA}} </h1>
-            <div class="d-flex">
+            <h2 class="d-block d-sm-none mb-1" style="font-weight: 500;">{{tiendaSeleccionada.TIENDA}}</h2>
+            <div class="d-flex d-sm-none">
+                <h6 class="mx-sm-2 badge bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h6>
+                <h6 class="ms-1 badge bg-secondary">{{tiendaSeleccionada.IDPDV}}</h6>
+            </div>
+            <h1 class="d-none d-sm-inline-block" style="font-weight: 500;">{{tiendaSeleccionada.TIENDA}} </h1>
+            <div class="d-none d-sm-flex">
                 <h3 class="mx-sm-2 badge bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h3>
                 <h3 class="ms-1 badge bg-secondary">{{tiendaSeleccionada.IDPDV}}</h3>
             </div>
         </div>
-        <hr>
-        <div class="col-12 mb-5">
-
+        <div class="col-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="navbar-link" aria-current="page" href="#">Prepago</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pospago</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pre vs Pos</a>
+                </li>
+            </ul>
         </div>
-
+        <div class="col-12">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
