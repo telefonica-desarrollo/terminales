@@ -7,12 +7,12 @@ import {PosPreComponent} from "./promociones/pos-pre/pos-pre.component"
 const routes: Routes = [
   {path: "prepago", component: PrepagoComponent},
   {path: "pospago", component: PospagoComponent},
-  {path: "prepago", component: PosPreComponent},
+  {path: "prepos", component: PosPreComponent},
   {path: "**", redirectTo: "prepago"}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
