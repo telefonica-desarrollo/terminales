@@ -11,26 +11,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from "../environments/environment"
 import { AngularFireModule } from '@angular/fire/compat';
 
+//Componentes
+import { PrepagoComponent } from './promociones/prepago/prepago.component';
+import { PospagoComponent } from './promociones/pospago/pospago.component';
+import { PosPreComponent } from './promociones/pos-pre/pos-pre.component';
+
 //Angular Material
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input"
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatTableModule} from '@angular/material/table';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { PrepagoComponent } from './promociones/prepago/prepago.component';
-import { PospagoComponent } from './promociones/pospago/pospago.component';
-import { PosPreComponent } from './promociones/pos-pre/pos-pre.component';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
   MatInputModule,
   MatFormFieldModule,
   MatAutocompleteModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTableModule
 ]
 
 @NgModule({
