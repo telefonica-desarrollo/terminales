@@ -8,4 +8,5 @@ export interface Tienda {
     COORDINADOR: string;
     STATUS:      string;
     IDPDV:       number;
+    PREPAGO?:     string;
 }
