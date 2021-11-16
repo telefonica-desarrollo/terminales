@@ -14,22 +14,31 @@ import { AngularFireModule } from '@angular/fire/compat';
 //Angular Material
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input"
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTabsModule} from '@angular/material/tabs';
+
+
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { PrepagoComponent } from './promociones/prepago/prepago.component';
+import { PospagoComponent } from './promociones/pospago/pospago.component';
+import { PosPreComponent } from './promociones/pos-pre/pos-pre.component';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
   MatInputModule,
   MatFormFieldModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatTabsModule
 ]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrepagoComponent,
+    PospagoComponent,
+    PosPreComponent
   ],
   imports: [
     BrowserModule,
@@ -37,13 +46,13 @@ const AngularMaterialModule: any = [
     
     FormsModule,
     ReactiveFormsModule,
-    
-    AngularFireModule.initializeApp(environment.firebase),
-    
     SwiperModule,
+    
     //Angular Material
     BrowserAnimationsModule,
     AngularMaterialModule,
+
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
