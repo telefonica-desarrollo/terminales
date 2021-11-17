@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Promociones }  from "../../interface/tiendas.interface"
 
 
 export interface PeriodicElement {
@@ -9,6 +10,41 @@ export interface PeriodicElement {
   symbol: string;
   description: string;
 }
+
+const PROMOCIONES_PREPAGO: Promociones[] =[
+  {
+    MARCA: "Huawei",
+    MODELO: "Huawei Y7A",
+    PRECIO_INICIAL: 5799,
+    PRECIO_FINAL: 4899,
+    CANTIDAD: 2,
+    DESCUENTO: 0.16
+  },
+  {
+    MARCA: "Xiaomi",
+    MODELO: "Xiaomi Redmi 9",
+    PRECIO_INICIAL: 4139,
+    PRECIO_FINAL: 3729,
+    CANTIDAD: 11,
+    DESCUENTO: 0.10
+  },
+  {
+    MARCA: "Motorola",
+    MODELO: "Motorola E6i",
+    PRECIO_INICIAL: 3299,
+    PRECIO_FINAL: 2999,
+    CANTIDAD: 4,
+    DESCUENTO: 0.9
+  },
+  {
+    MARCA: "Oppo",
+    MODELO: "Oppo A53",
+    PRECIO_INICIAL: 5499,
+    PRECIO_FINAL: 4999,
+    CANTIDAD: 2,
+    DESCUENTO: 0.9
+  }
+] 
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
@@ -116,8 +152,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PrepagoComponent implements OnInit {
 
   constructor() { }
-  dataSource = ELEMENT_DATA;
+  data = PROMOCIONES_PREPAGO;
+  columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL'];
+  expandedPromocion: Promociones[] | null;
+
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  dataSource = ELEMENT_DATA;
   expandedElement: PeriodicElement | null;
 
   ngOnInit(): void {
