@@ -26,6 +26,7 @@ import {MatTableModule} from '@angular/material/table';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { ReducirNombrePipe } from './pipes/reducir-nombre.pipe';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -41,7 +42,8 @@ const AngularMaterialModule: any = [
     AppComponent,
     PrepagoComponent,
     PospagoComponent,
-    PosPreComponent
+    PosPreComponent,
+    ReducirNombrePipe
   ],
   imports: [
     BrowserModule,
