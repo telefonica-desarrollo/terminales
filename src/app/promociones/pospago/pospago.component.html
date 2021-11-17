@@ -1,1 +1,49 @@
-<p>pospago works!</p>
+<table mat-table [dataSource]="data" multiTemplateDataRows class="mat-elevation-z1 mb-3">
+    <ng-container matColumnDef="MODELO">
+        <th mat-header-cell *matHeaderCellDef>Modelo</th>
+        <td mat-cell *matCellDef="let element">
+            <div class="d-none d-sm-block">
+                {{element.MODELO}}
+            </div>
+            <div class="d-block d-sm-none">
+                {{element.MODELO | reducirNombre}}
+            </div>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="PRECIO_INICIAL">
+        <th mat-header-cell *matHeaderCellDef>Precio incial</th>
+        <td mat-cell *matCellDef="let element">{{element.PRECIO_INICIAL | currency:'MXN': 'symbol-narrow' : '1.0-2' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="PRECIO_FINAL">
+        <th mat-header-cell *matHeaderCellDef>Precio final</th>
+        <td mat-cell *matCellDef="let element">{{element.PRECIO_FINAL | currency:'MXN': 'symbol-narrow' : '1.0-2' }}</td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length">
+            <div class="example-element-detail row justify-content-center" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="col-12 col-sm-4">
+                    <div class="row">
+                        <div class="col align-self-end">
+                            <p style="font-size: medium; letter-spacing: 1.2px;" class="badge bg-dark"> {{element.MARCA}} </p><br>
+                        </div>
+                        <div class="col text-center">
+                            <h1 class="display-3 mb-0">{{element.CANTIDAD | number}}</h1>
+                            <span class="text-muted mt-0">Cantidad</span>
+                        </div>
+                        <div class="col text-center">
+                            <h1 class="display-3 mb-0">{{(element.PRECIO_INICIAL - element.PRECIO_FINAL) / element.PRECIO_INICIAL | percent}}</h1>
+                            <span class="text-muted mt-0">Descuento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay2"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay2;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
