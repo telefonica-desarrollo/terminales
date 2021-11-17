@@ -10,3 +10,12 @@ export interface Tienda {
     IDPDV:       number;
     PREPAGO?:     string;
 }
+
+export interface Promociones {
+    MARCA: string;
+    MODELO: string;
+    PRECIO_INICIAL: number;
+    PRECIO_FINAL: number;
+    CANTIDAD?: number;
+    DESCUENTO: number;
+}
