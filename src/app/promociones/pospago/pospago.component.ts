@@ -53,7 +53,7 @@ export class PospagoComponent implements OnInit {
 
   constructor() { }
   data = PROMOCIONES_PREPAGO;
-  columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL'];
+  columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
   expandedElement: Promociones[] | null;
 
   ngOnInit(): void {
