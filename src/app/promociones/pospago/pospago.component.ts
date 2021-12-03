@@ -12,8 +12,8 @@ const PROMOCIONES_PREPAGO: Promociones[] =[
     DESCUENTO: 0.16
   },
   {
-    MARCA: "Xiaomi",
-    MODELO: "Xiaomi Redmi 9",
+    MARCA: "Samsung",
+    MODELO: "Samsung Galaxy A22 Negro",
     PRECIO_INICIAL: 4139,
     PRECIO_FINAL: 3729,
     CANTIDAD: 11,
