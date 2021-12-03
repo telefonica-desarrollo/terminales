@@ -28,6 +28,8 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { ReducirNombrePipe } from './pipes/reducir-nombre.pipe';
 import { ComisionPipe } from './pipes/comision.pipe';
+import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.component';
+import { AparecerNombrePipe } from './pipes/aparecer-nombre.pipe';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -45,7 +47,9 @@ const AngularMaterialModule: any = [
     PospagoComponent,
     PosPreComponent,
     ReducirNombrePipe,
-    ComisionPipe
+    ComisionPipe,
+    RenovacionesComponent,
+    AparecerNombrePipe
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row mx-1 mt-5">
+<div class="container px-sm-5 pb-5">
+    <div class="row mt-5">
         <div class="col-12 col-md-5 bg-cp rounded pt-2">
             <p class="text-muted">Ingrese lo siguiente: </p>
             <mat-form-field class="example-full-width w-100" appearance="fill">
@@ -14,19 +14,20 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="row bg-cp mt-4 mx-1 rounded">
-        <div class="col-12 mt-3 d-sm-flex align-items-center justify-content-between" *ngIf="tiendaSeleccionada">
-            <h2 class="d-block d-sm-none mb-1" style="font-weight: 500;">{{tiendaSeleccionada.TIENDA}}</h2>
+    <div class="row bg-cp mt-2 rounded align-items-center">
+        <div class="col-12  d-sm-flex align-items-center justify-content-between mb-1 mt-4" *ngIf="tiendaSeleccionada">
+            <p class="d-block d-sm-none  display-5" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}}</p>
             <div class="d-flex d-sm-none">
-                <h6 class="mx-sm-2 badge bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h6>
-                <h6 class="ms-1 badge bg-secondary">{{tiendaSeleccionada.IDPDV}}</h6>
+                <h6 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h6>
+                <h6 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h6>
             </div>
-            <h1 class="d-none d-sm-inline-block" style="font-weight: 500;">{{tiendaSeleccionada.TIENDA}} </h1>
+            <p class="d-none d-sm-inline-block display-5" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}} </p>
             <div class="d-none d-sm-flex">
-                <h3 class="mx-sm-2 badge bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h3>
-                <h3 class="ms-1 badge bg-secondary">{{tiendaSeleccionada.IDPDV}}</h3>
+                <h3 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h3>
+                <h3 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h3>
             </div>
         </div>
+
         <div class="col-12 mt-2">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -41,7 +42,7 @@
             </ul>
         </div>
         <hr>
-        <div class="col-12">
+        <div class="col-12 my-2 pb-5">
             <router-outlet></router-outlet>
         </div>
     </div>
