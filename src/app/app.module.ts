@@ -30,6 +30,8 @@ import { ReducirNombrePipe } from './pipes/reducir-nombre.pipe';
 import { ComisionPipe } from './pipes/comision.pipe';
 import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.component';
 import { AparecerNombrePipe } from './pipes/aparecer-nombre.pipe';
+import { PrecioTasasPipe } from './pipes/precio-tasas.pipe';
+import { PrecioFinalPipe } from './pipes/precio-final.pipe';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -49,7 +51,9 @@ const AngularMaterialModule: any = [
     ReducirNombrePipe,
     ComisionPipe,
     RenovacionesComponent,
-    AparecerNombrePipe
+    AparecerNombrePipe,
+    PrecioTasasPipe,
+    PrecioFinalPipe
   ],
   imports: [
     BrowserModule,
