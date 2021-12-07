@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Promociones }  from "../../interface/tiendas.interface"
+import { TerminalesService } from 'src/app/services/terminales.service';
 
 const PROMOCIONES_PREPAGO: Promociones[] =[
   {
@@ -37,6 +38,7 @@ const PROMOCIONES_PREPAGO: Promociones[] =[
   }
 ] 
 
+
 @Component({
   selector: 'app-pospago',
   templateUrl: './pospago.component.html',
@@ -51,8 +53,12 @@ const PROMOCIONES_PREPAGO: Promociones[] =[
 })
 export class PospagoComponent implements OnInit {
 
-  constructor() { }
-  data = PROMOCIONES_PREPAGO;
+  constructor(private terminales: TerminalesService) {
+    this.data = this.terminales.obtenerPromocionesPospago()
+    console.log(this.data);
+    
+  }
+  data: any = [];
   columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
   expandedElement: Promociones[] | null;
 
