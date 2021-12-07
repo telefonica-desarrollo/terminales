@@ -36,6 +36,8 @@ export class AppComponent {
     // })
 
     this.tiendas = this._tiendas.tiendas;
+    console.log(this.tiendas);
+    
     
     this.stateCtrl.valueChanges.subscribe((tienda)=> {
       this.tiendaSeleccionada = null;
@@ -60,7 +62,7 @@ export class AppComponent {
 
   private _filtroTiendas(value: string): Tienda[] {
     const filtroValor = value.toString().toLowerCase();
-    return this.tiendas.filter(tienda => tienda.IDPDV.toString().includes(filtroValor) || tienda.TIENDA.toLowerCase().includes(filtroValor))
+    return this.tiendas.filter(tienda => tienda.IDPDV.toString().includes(filtroValor) || tienda.TIENDA?.toLowerCase().includes(filtroValor))
   }
 
 }
