@@ -1,16 +1,30 @@
-<div class="row mx-1 mb-2 justify-content-end">
-    <div class="col-12 col-md-5 card pt-4 rounded-3">
-        <mat-form-field appearance="fill">
+<div class="row mx-1 mb-2 bg-white pt-4 rounded">
+    <div class="col-12 col-md-4">
+        <mat-form-field appearance="fill" style="width: 100%;">
             <mat-label>Marca</mat-label>
             <mat-select value="Todas">
                 <mat-option (click)="filtroMarca('Todas')" value="Todas">
                     Todas
                 </mat-option>
-                <mat-option *ngFor="let food of marcas" (click)="filtroMarca(food)" [value]="food">
-                    {{food}}
+                <mat-option *ngFor="let marca of marcas" (click)="filtroMarca(marca)" [value]="marca">
+                    {{marca}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
+    <div class="col-6 col-md-4">
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Tasas</mat-label>
+            <mat-select value="0">
+                <mat-option value="0" (click)="filtroTasa(0)"> De contado </mat-option>
+                <mat-option value="12" (click)="filtroTasa(12)">12 Meses</mat-option>
+                <mat-option value="18" (click)="filtroTasa(18)">18 Meses</mat-option>
+                <mat-option value="24" (click)="filtroTasa(24)">24 Meses</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-4">
+
     </div>
 </div>
 <div class="row mx-1" *ngIf="this.data.length > 0">
@@ -34,7 +48,8 @@
                 <p class="mx-2 mt-2">Precio incial</p>
             </th>
             <td mat-cell *matCellDef="let element">
-                {{element.PVP | currency:'MXN': 'symbol-narrow' : '1.0-2' }}
+                {{element.PVP | precioTasas: valueTasa | currency:'MXN': 'symbol-narrow' : '1.0-0' }}
+                <br class="d-block d-sm-none"><span class="text-muted">{{mensajeTasa}}</span>
             </td>
         </ng-container>
         <!-- ------------------------------------------------------------Precio Finaal-->
@@ -43,8 +58,8 @@
                 <p class="mx-2 mt-2">Precio final</p>
             </th>
             <td mat-cell *matCellDef="let element">
-                {{element.PVP | precioFinal: element.PORCENTAJE| currency:'MXN': 'symbol-narrow' : '1.0-1'}}
-                <br class="d-block d-sm-none"><span class="text-muted">de contado</span>
+                {{element.PVP | precioTasas: valueTasa : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0'}}
+                <br class="d-block d-sm-none"><span class="text-muted">{{mensajeTasa}}</span>
             </td>
         </ng-container>
         <!-- ------------------------------------------------------------Comision -->
@@ -99,10 +114,16 @@
                                 </thead>
                                 <tbody>
                                     <tr style="font-size: small;">
-                                        <th>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
-                                        <td>{{element.PVP | precioTasas: 0.06 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                        <td>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                        <td>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        <td>{{element.PVP | precioTasas: 0 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        <td>{{element.PVP | precioTasas: 0.06| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        <td>{{element.PVP | precioTasas: 0.08| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        <td>{{element.PVP | precioTasas: 0.10| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                    </tr>
+                                    <tr style="font-size: small;">
+                                        <th>{{element.PVP | precioTasas: 0 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                        <th>{{element.PVP | precioTasas: 0.06 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                        <th>{{element.PVP | precioTasas: 0.08 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                        <th>{{element.PVP | precioTasas: 0.10 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
                                     </tr>
                                 </tbody>
                             </table>
