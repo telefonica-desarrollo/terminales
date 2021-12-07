@@ -1,4 +1,5 @@
-<table mat-table [dataSource]="data" multiTemplateDataRows class="">
+<table mat-table [dataSource]="data" multiTemplateDataRows>
+    <!-- ------------------------------------------------------------Modelo -->
     <ng-container matColumnDef="MODELO">
         <th mat-header-cell *matHeaderCellDef>Modelo</th>
         <td mat-cell *matCellDef="let element">
@@ -11,26 +12,29 @@
             </div>
         </td>
     </ng-container>
+    <!-- ------------------------------------------------------------Precio Inicial -->
     <ng-container matColumnDef="PRECIO_INICIAL">
         <th mat-header-cell *matHeaderCellDef>
             <p class="mx-2 mt-2">Precio incial</p>
         </th>
         <td mat-cell *matCellDef="let element">
-            {{element.PRECIO_INICIAL | currency:'MXN': 'symbol-narrow' : '1.0-2' }}
+            {{element.PVP | currency:'MXN': 'symbol-narrow' : '1.0-2' }}
         </td>
     </ng-container>
+    <!-- ------------------------------------------------------------Precio Finaal-->
     <ng-container matColumnDef="PRECIO_FINAL">
         <th mat-header-cell *matHeaderCellDef>
             <p class="mx-2 mt-2">Precio final</p>
         </th>
         <td mat-cell *matCellDef="let element">
-            {{element.PRECIO_FINAL | currency:'MXN': 'symbol-narrow' : '1.0-2'}}
+            {{element.PVP | precioFinal: element.PORCENTAJE_POS| currency:'MXN': 'symbol-narrow' : '1.0-2'}}
             <br class="d-block d-sm-none"><span class="text-muted">de contado</span>
         </td>
     </ng-container>
+    <!-- ------------------------------------------------------------Comision -->
     <ng-container matColumnDef="COMISION">
         <th mat-header-cell *matHeaderCellDef>Comision</th>
-        <td mat-cell *matCellDef="let element"><strong>{{element.PRECIO_FINAL | comision | currency:'MXN': 'symbol-narrow' : '1.2' }}</strong></td>
+        <td mat-cell *matCellDef="let element"><strong>{{ element.PVP| comision: element.PORCENTAJE_POS | currency:'MXN': 'symbol-narrow' : '1.1-1' }}</strong></td>
     </ng-container>
 
 
@@ -38,7 +42,7 @@
     <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length">
             <div class="example-element-detail row justify-content-center" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="col-12 col-sm-10">
+                <div class="col-12 col-md-10">
 
                     <!-- ------------------MODELO------------------------- -->
                     <div class="row mt-4 mb-2">
@@ -50,7 +54,7 @@
                         </div>
                     </div>
                     <!-- -------------------------CANTIDAD,PRECIOS------------------------- -->
-                    <div class="row mx-sm-5 px-sm-5 align-items-center">
+                    <div class="row mx-md-5 px-md-5 align-items-center">
                         <div class="col-3  text-center">
                             <p class="badge bg-success">PAYJOY</p>
                         </div>
@@ -58,34 +62,34 @@
                             <h1 class="display-3 mb-0">{{element.CANTIDAD | number}}</h1>
                             <span class="text-muted mt-0">Cantidad</span>
                         </div>
-                        <div class="col-3  text-center">
-                            <h1 class="display-3 mb-0">{{(element.PRECIO_INICIAL - element.PRECIO_FINAL) / element.PRECIO_INICIAL | percent}}</h1>
-                            <span class="text-muted mt-0">Descuento</span>
-                        </div>
                         <div class="col-4  text-center">
-                            <h1 class="display-3 mb-0">{{element.PRECIO_FINAL | comision | currency:'MXN': 'symbol-narrow' : '1.2' }}</h1>
+                            <h1 class="display-3 mb-0">{{element.PVP| comision: element.PORCENTAJE_POS | currency:'MXN': 'symbol-narrow' : '1.2' }}</h1>
                             <span class="text-muted mt-0">Comision</span>
                         </div>
-                        <div class="col-12 mt-2 mb-2">
-                            <table class="table table-active text-center shadow rounded">
-                                <thead class="bg-secondary text-white py-2">
-                                    <tr class="py-2">
-                                        <td>PVP base</td>
-                                        <td>12m</td>
-                                        <td>18m</td>
-                                        <td>24m</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12000</td>
-                                        <td>12345</td>
-                                        <td>12500</td>
-                                        <td>17000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-3  text-center">
+                            <h1 class="display-3 mb-0">{{element.PORCENTAJE_POS | percent}}</h1>
+                            <span class="text-muted mt-0">Descuento</span>
                         </div>
+                    </div>
+                    <div class="row mt-2 mb-2">
+                        <table class="table table-active text-center shadow rounded">
+                            <thead class="bg-secondary text-white">
+                                <tr>
+                                    <td scope="col">PVP</td>
+                                    <td scope="col">12 M</td>
+                                    <td scope="col">18 M</td>
+                                    <td scope="col">24 M</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: x-small;">
+                                    <th>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.2-2' }}</th>
+                                    <td>{{element.PVP | precioTasas: 0.06 | currency:'MXN': 'symbol-narrow' : '1.2-2' }}</td>
+                                    <td>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.2-2' }}</td>
+                                    <td>{{element.PVP | currency:'MXN': 'symbol-narrow' : '1.2-2' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <hr>
                 </div>
