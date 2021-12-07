@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, retry, startWith} from 'rxjs/operators';
+
+
 import { Tienda } from './interface/tiendas.interface';
 import { TiendasService } from './services/tiendas.service';
 
@@ -34,6 +36,7 @@ export class AppComponent {
     // })
 
     this.tiendas = this._tiendas.tiendas;
+    
     this.stateCtrl.valueChanges.subscribe((tienda)=> {
       this.tiendaSeleccionada = null;
       this.tiendas.forEach((btienda)=> {
