@@ -1,0 +1,70 @@
+table {
+    width: 100%;
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #dbdbdb;
+}
+
+tr.example-element-row {
+    background-color: #dbdbdb;
+}
+
+tr.example-element-row:not(.example-expanded-row) {
+    background: none;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #dbdbdb;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+span {
+    font-size: 10px;
+}
+
+.mat-column-MODELO {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 35% !important;
+    width: 35% !important;
+    overflow-wrap: unset;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.mat-column-PRECIO_FINAL {
+    text-align: center;
+    flex: 0 0 22.5% !important;
+    width: 22.5% !important;
+    overflow-wrap: unset;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.mat-column-PRECIO_INICIAL {
+    text-align: center;
+    flex: 0 0 22.5% !important;
+    width: 22.5% !important;
+    overflow-wrap: unset;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.mat-column-COMISION {
+    text-align: center;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+}
