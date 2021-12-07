@@ -18,12 +18,23 @@
     color: #f0e8f6;
 }
 
-body {
-    background-color: #211e30;
+.container-fluid {
+    /* background: #211e30; */
+    background: linear-gradient(180deg, #0e1a30 0%, #1D3461 10%);
+    /* height: 100% !importan; */
 }
 
 .bg-cp {
-    background-color: #f0e8f6;
+    background-color: #f3f3f3;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: #1D3461;
+}
