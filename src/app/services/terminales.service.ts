@@ -17,7 +17,7 @@ export class TerminalesService {
    }
 
    obtenerPromocionesPrepago(){
-
+      return this.tienda.PROMOCIONES_PREPAGO
    }
    obtenerPromocionesPospago(){
       return this.tienda.PROMOCIONES_POSPAGO
