@@ -46,15 +46,25 @@ span {
 }
 
 .mat-column-PRECIO_FINAL {
+    text-align: center;
     flex: 0 0 22.5% !important;
     width: 22.5% !important;
-    padding-bottom: 0;
-    text-align: center;
+    overflow-wrap: unset;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .mat-column-PRECIO_INICIAL {
+    text-align: center;
     flex: 0 0 22.5% !important;
     width: 22.5% !important;
-    padding-bottom: 0;
+    overflow-wrap: unset;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.mat-column-COMISION {
     text-align: center;
+    flex: 0 0 15% !important;
+    width: 15% !important;
 }
