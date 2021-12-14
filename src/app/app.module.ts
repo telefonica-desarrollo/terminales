@@ -24,6 +24,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSliderModule} from '@angular/material/slider';
+
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
@@ -42,7 +44,8 @@ const AngularMaterialModule: any = [
   MatAutocompleteModule,
   MatTabsModule,
   MatTableModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSliderModule
 ]
 
 @NgModule({
