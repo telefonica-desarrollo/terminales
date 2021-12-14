@@ -23,6 +23,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
@@ -32,6 +33,7 @@ import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.c
 import { AparecerNombrePipe } from './pipes/aparecer-nombre.pipe';
 import { PrecioTasasPipe } from './pipes/precio-tasas.pipe';
 import { PrecioFinalPipe } from './pipes/precio-final.pipe';
+import { PrecioMensualPipe } from './pipes/precio-mensual.pipe';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -39,7 +41,8 @@ const AngularMaterialModule: any = [
   MatFormFieldModule,
   MatAutocompleteModule,
   MatTabsModule,
-  MatTableModule
+  MatTableModule,
+  MatExpansionModule
 ]
 
 @NgModule({
@@ -53,7 +56,8 @@ const AngularMaterialModule: any = [
     RenovacionesComponent,
     AparecerNombrePipe,
     PrecioTasasPipe,
-    PrecioFinalPipe
+    PrecioFinalPipe,
+    PrecioMensualPipe
   ],
   imports: [
     BrowserModule,
