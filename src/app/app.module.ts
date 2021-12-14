@@ -36,6 +36,8 @@ import { AparecerNombrePipe } from './pipes/aparecer-nombre.pipe';
 import { PrecioTasasPipe } from './pipes/precio-tasas.pipe';
 import { PrecioFinalPipe } from './pipes/precio-final.pipe';
 import { PrecioMensualPipe } from './pipes/precio-mensual.pipe';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './promociones/home/home.component';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -60,7 +62,9 @@ const AngularMaterialModule: any = [
     AparecerNombrePipe,
     PrecioTasasPipe,
     PrecioFinalPipe,
-    PrecioMensualPipe
+    PrecioMensualPipe,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
