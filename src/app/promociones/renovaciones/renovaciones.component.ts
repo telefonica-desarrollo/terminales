@@ -30,6 +30,41 @@ export class RenovacionesComponent implements OnInit {
     this.dataSave = this.data
     this.obtenerCatalogo()
 
+    
+  }
+
+  data: any = [];
+  dataSave: any = []
+  marcas: any = [];
+  mensajeTasa: string = "De contado";
+  valueTasa: number = 0;
+
+  valorPayjoy: any= false
+  valorMarcas: string | null
+  valorTasas: string | null = "0"
+  valorModelo= ""
+  valorGastoMaxmo: any = 25000;
+
+  columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
+  expandedElement: Promociones[] | null;
+
+  ngOnInit(): void {
+  }
+
+  obtenerCatalogo(){
+    //Obtener Catalogo de marcas
+    this.marcas = []
+    for(let promo of this.dataSave){
+      let validar = true
+      for(let marca of this.marcas){
+        if(marca == promo.MARCA) validar = false
+      }
+      if(validar) this.marcas.push(promo.MARCA)
+    }
+    //Ordenar Catalogo de marcas
+    this.marcas.sort()
+  }
+  obtenerDataGuardada(){
     //Obtener Data guardada
     if(localStorage.getItem("tasa_renovacion")){
       this.valorTasas = localStorage.getItem("tasa_renovacion")
@@ -44,58 +79,39 @@ export class RenovacionesComponent implements OnInit {
     }
   }
 
-  data: any = [];
-  dataSave: any = []
-  marcas: any = [];
-  mensajeTasa: string = "De contado";
-  valueTasa: number = 0;
-
-  valorPayjoy: any= false
-  valorMarcas: string | null = ""
-  valorTasas: string | null = "0"
-  valorModelo= ""
-
-  columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
-  expandedElement: Promociones[] | null;
-
-  ngOnInit(): void {
-  }
-
-  obtenerCatalogo(){
-    //Obtener Catalogo de marcas
-    this.marcas = []
-    for(let promo of this.data){
-      let validar = true
-      for(let marca of this.marcas){
-        if(marca == promo.MARCA) validar = false
-      }
-      if(validar) this.marcas.push(promo.MARCA)
-    }
-    //Ordenar Catalogo de marcas
-    this.marcas.sort()
-  }
+  //FILTROOOOOOOOOOOS
 
   filtroModelo(){
     const modelo = this.valorModelo.toLowerCase();
-    this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo))
-    this.obtenerCatalogo();
+    const marca = this.valorMarcas;
+    if(marca == "Todas"){
+      this.data  = this.dataSave
+      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo))
+    }
+    else{
+      this.data = this.dataSave.filter((data: any) => data.MARCA == marca &&  data.MODELO.toLowerCase().includes(modelo))
+    }
   }
+
   filtroMarca(marca: any){
-    this.data = []
     const modelo = this.valorModelo.toLowerCase();
+    localStorage.setItem("marca_renovacion", marca);
+    this.valorMarcas = marca;
 
     if(marca == "Todas"){
       this.data  = this.dataSave
-      this.filtroModelo()
+      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo))
     }
     else{
-      this.dataSave.forEach((promocion: any) => {
-        if(promocion.MARCA == marca && 
-          promocion.MODELO.toLowerCase().includes(modelo)) this.data.push(promocion)
-      });
+      this.data = this.dataSave.filter((data: any) => data.MARCA == marca &&  data.MODELO.toLowerCase().includes(modelo))
     }
-    localStorage.setItem("marca_renovacion", marca);
   }
+  filtroPayjoy(){
+    localStorage.setItem("payjoy_renovacion", this.valorPayjoy);
+  }
+
+  //DATA CAMBIA
+
   filtroTasa(tasa: any){
     if(tasa == 0){
       this.mensajeTasa = "de contado"
@@ -115,10 +131,18 @@ export class RenovacionesComponent implements OnInit {
     }
     localStorage.setItem("tasa_renovacion", tasa);
   }
-  filtroPayjoy(){
-    localStorage.setItem("payjoy_renovacion", this.valorPayjoy);
-  }
   
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+  valorCambia(e: any){
+    this.valorGastoMaxmo = e
+    console.log(e);
+  }
   
   
 }

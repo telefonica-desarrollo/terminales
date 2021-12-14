@@ -38,9 +38,13 @@
         </mat-form-field>
     </div>
     <div class="col-12 order-5 mb-2">
-        <div class="row justify-content-end">
+        <div class="row justify-content-md-between justify-content-end align-items-center">
+            <div class="col-12 col-md-5">
+                <mat-label class="mx-2 text-muted">Gasto máximo: {{valorGastoMaxmo | currency:'MXN': 'symbol-narrow' : '1.0-0'}}</mat-label>
+                <mat-slider thumbLabel class="w-100" [displayWith]="formatLabel" tickInterval="1000" step="1000" min="0" [value]="valorGastoMaxmo" max="25000" aria-label="units" (change)="valorCambia($event.value)"></mat-slider>
+            </div>
             <div class="col-8 col-md-3">
-                <button class="btn btn-dark w-100">Limpiar Filtros</button>
+                <button class="btn btn-dark w-100 btn-sm">Limpiar Filtros</button>
             </div>
         </div>
     </div>
@@ -48,7 +52,7 @@
 <hr>
 <div class="row mx-1 mt-2 bg-white">
     <div class="col-12 card text-center py-3 mt-2 text-muted" *ngIf="this.data.length == 0">
-        No hay ningun registro perro
+        No hay ningun registro de promociones
     </div>
     <table mat-table [dataSource]="data" multiTemplateDataRows *ngIf="this.data.length > 0">
         <!-- ------------------------------------------------------------Modelo -->
@@ -106,6 +110,7 @@
                                     <p class="badge bg-marca shadow-sm text-center mb-0" style="font-size: medium; letter-spacing: 1.3px;">{{element.MARCA}}</p>
                                 </div>
                             </div>
+                            <hr>
                             <!-- -------------------------CANTIDAD,PRECIOS------------------------- -->
                             <div class="row mx-md-5 px-md-5 align-items-center">
                                 <div class="col-4">
@@ -133,6 +138,7 @@
                                     <span class="text-muted text-center">Descuento</span>
                                 </div>
                             </div>
+                            <hr>
                             <!-- -----------------------------------------Tabla de tasas--------------- -->
                             <div class="row mt-2 mb-1">
                                 <table class="table table-striped text-center rounded">
@@ -158,24 +164,28 @@
                                             <th>{{element.PVP | precioTasas: 0.20 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
                                         </tr>
                                         <tr>
-                                            <td colspan="4">Pago Mensual</td>
+                                            <td colspan="4" class="text-muted">Pago Mensual</td>
                                         </tr>
                                         <tr style="font-size: small;">
-                                            <td> </td>
-                                            <td>{{element.PVP | precioTasas: 0.09 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                            <td>{{element.PVP | precioTasas: 0.14 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                            <td>{{element.PVP | precioTasas: 0.20 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td> - </td>
+                                            <td>{{element.PVP | precioMensual: 0.09 : element.PORCENTAJE : 12 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioMensual: 0.14 : element.PORCENTAJE : 18 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioMensual: 0.20 : element.PORCENTAJE : 24 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <hr class="my-2">
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <p class="badge bg-success mb-0" style="font-size: 15px; letter-spacing: 1px; font-weight: 400;">Payjoy</p>
                                 </div>
                             </div>
-                            <hr class="mt-2 mb-5">
+                            <hr class="my-2">
+                            <div class="row mb-4">
+                                <div class="col-12 text-muted text-center" style="font-size: small;">
+                                    Vigente hasta 10/12/2021
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
