@@ -55,14 +55,64 @@ export class PospagoComponent implements OnInit {
 
   constructor(private terminales: TerminalesService) {
     this.data = this.terminales.obtenerPromocionesPospago()
-    console.log(this.data);
-    
+    //Ordenar data
+    this.data.sort((a: any , b: any )=> {
+      if(a.PORCENTAJE == b.PORCENTAJE) return 0
+      if(a.PORCENTAJE > b.PORCENTAJE ) return 1
+      return -1
+    })
+    //Obtener Catalogo de marcas
+    for(let promo of this.data){
+      let validar = true
+      for(let marca of this.marcas){
+        if(marca == promo.MARCA) validar = false
+      }
+      if(validar) this.marcas.push(promo.MARCA)
+    }
+    this.dataSave = this.data
   }
+  
   data: any = [];
+  dataSave: any = []
+  marcas: any = [];
+  mensajeTasa: string = "De contado";
+  valueTasa: number = 0;
+
+
   columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
   expandedElement: Promociones[] | null;
 
   ngOnInit(): void {
+  }
+  
+  filtroMarca(marca: any){
+    this.data = []
+    if(marca == "Todas") this.data  = this.dataSave
+    else{
+      this.dataSave.forEach((promocion: any) => {
+        if(promocion.MARCA == marca) this.data.push(promocion)
+      });
+    }
+    console.table(this.data)
+  }
+
+  filtroTasa(tasa: any){
+    if(tasa == 0){
+      this.mensajeTasa = "de contado"
+      this.valueTasa = 0 
+    }
+    if(tasa == 12){
+      this.mensajeTasa = "a 12 meses"
+      this.valueTasa = 0.06
+    }
+    if(tasa == 18){
+      this.mensajeTasa = "a 18 meses"
+      this.valueTasa = 0.08
+    }
+    if(tasa == 24){
+      this.mensajeTasa = "a 24 meses"
+      this.valueTasa = 0.10
+    }
   }
 
 }
