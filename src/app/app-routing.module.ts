@@ -13,7 +13,8 @@ const routes: Routes = [
     {path: "prepago", component: PrepagoComponent},
     {path: "pospago", component: PospagoComponent},
     {path: "renovaciones", component: RenovacionesComponent},
-  ]}
+  ]},
+  {path: "**", redirectTo: "login"}
 ];
 
 @NgModule({

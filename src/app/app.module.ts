@@ -14,7 +14,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 //Componentes
 import { PrepagoComponent } from './promociones/prepago/prepago.component';
 import { PospagoComponent } from './promociones/pospago/pospago.component';
-import { PosPreComponent } from './promociones/pos-pre/pos-pre.component';
 
 //Angular Material
 import { MatSelectModule } from "@angular/material/select";
@@ -55,7 +54,6 @@ const AngularMaterialModule: any = [
     AppComponent,
     PrepagoComponent,
     PospagoComponent,
-    PosPreComponent,
     ReducirNombrePipe,
     ComisionPipe,
     RenovacionesComponent,
