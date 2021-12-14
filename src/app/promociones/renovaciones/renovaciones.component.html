@@ -1,8 +1,33 @@
 <div class="row mx-1 mb-2 bg-white pt-4 rounded">
-    <div class="col-12 col-md-4">
+    <div class="col-6 col-md-3 order-2 order-md-1">
+        <div class="form-check py-3 rounded" style="background-color: rgba(0,0,0,.04);" (change)="filtroPayjoy()">
+            <input class="form-check-input mx-1" type="checkbox" [(ngModel)]="valorPayjoy" id="flexCheckDefault">
+            <label class="form-check-label ms-1" for="flexCheckDefault">
+              Payjoy
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-9 order-1 order-md-2">
+        <mat-form-field class="w-100" appearance="fill" (keyup)="filtroModelo()">
+            <mat-label>Ingrese el Modelo</mat-label>
+            <input matInput placeholder="Modelo" [(ngModel)]="valorModelo">
+        </mat-form-field>
+    </div>
+    <div class="col-6 order-2 order-md-3">
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Tasas</mat-label>
+            <mat-select [value]="valorTasas">
+                <mat-option value="0" (click)="filtroTasa(0)"> De contado </mat-option>
+                <mat-option value="12" (click)="filtroTasa(12)">12 Meses</mat-option>
+                <mat-option value="18" (click)="filtroTasa(18)">18 Meses</mat-option>
+                <mat-option value="24" (click)="filtroTasa(24)">24 Meses</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-6 order-4">
         <mat-form-field appearance="fill" style="width: 100%;">
             <mat-label>Marca</mat-label>
-            <mat-select value="Todas">
+            <mat-select [value]="valorMarcas">
                 <mat-option (click)="filtroMarca('Todas')" value="Todas">
                     Todas
                 </mat-option>
@@ -12,23 +37,20 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="col-6 col-md-4">
-        <mat-form-field appearance="fill" style="width: 100%;">
-            <mat-label>Tasas</mat-label>
-            <mat-select value="0">
-                <mat-option value="0" (click)="filtroTasa(0)"> De contado </mat-option>
-                <mat-option value="12" (click)="filtroTasa(12)">12 Meses</mat-option>
-                <mat-option value="18" (click)="filtroTasa(18)">18 Meses</mat-option>
-                <mat-option value="24" (click)="filtroTasa(24)">24 Meses</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div class="col-4">
-
+    <div class="col-12 order-5 mb-2">
+        <div class="row justify-content-end">
+            <div class="col-8 col-md-3">
+                <button class="btn btn-dark w-100">Limpiar Filtros</button>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row mx-1" *ngIf="this.data.length > 0">
-    <table mat-table [dataSource]="data" multiTemplateDataRows>
+<hr>
+<div class="row mx-1 mt-2 bg-white">
+    <div class="col-12 card text-center py-3 mt-2 text-muted" *ngIf="this.data.length == 0">
+        No hay ningun registro perro
+    </div>
+    <table mat-table [dataSource]="data" multiTemplateDataRows *ngIf="this.data.length > 0">
         <!-- ------------------------------------------------------------Modelo -->
         <ng-container matColumnDef="MODELO">
             <th mat-header-cell *matHeaderCellDef>Modelo</th>
@@ -72,63 +94,89 @@
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
         <ng-container matColumnDef="expandedDetail">
             <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length">
-                <div class="example-element-detail row justify-content-center" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    <div class="col-12 col-md-10">
-
-                        <!-- ------------------MODELO------------------------- -->
-                        <div class="row mt-4 mb-2">
-                            <div class="col-12 text-center text-muted  mb-2 display-6">
-                                {{element.MODELO}}
+                <div class="example-element-detail w-100" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="row justify-content-center w-100 g-0">
+                        <div class="col-12 col-md-8">
+                            <!-- ------------------MODELO------------------------- -->
+                            <div class="row mt-4 mb-2">
+                                <div class="col-12 text-center text-muted  mb-2 display-6">
+                                    {{element.MODELO}}
+                                </div>
+                                <div class="col-12 text-center">
+                                    <p class="badge bg-marca shadow-sm text-center mb-0" style="font-size: medium; letter-spacing: 1.3px;">{{element.MARCA}}</p>
+                                </div>
                             </div>
-                            <div class="col-12 text-center">
-                                <p class="badge bg-dark mx-2 shadow text-center" style="font-size: medium; letter-spacing: 1.3px;">{{element.MARCA}}</p>
+                            <!-- -------------------------CANTIDAD,PRECIOS------------------------- -->
+                            <div class="row mx-md-5 px-md-5 align-items-center">
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h1 class="display-3 mb-0 text-center">{{element.CANTIDAD | number}}</h1>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <span class="text-muted">Disponible</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4  text-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h1 class="display-3 mb-0 text-center">{{element.PVP| comision: element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</h1>
+                                        </div>
+                                        <div class="col-12">
+                                            <span class="text-muted text-center">Comision</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4  text-center">
+                                    <h1 class="display-3 mb-0 text-center">{{element.PORCENTAJE | percent}}</h1>
+                                    <span class="text-muted text-center">Descuento</span>
+                                </div>
                             </div>
+                            <!-- -----------------------------------------Tabla de tasas--------------- -->
+                            <div class="row mt-2 mb-1">
+                                <table class="table table-striped text-center rounded">
+                                    <thead class="bg-table text-white">
+                                        <tr>
+                                            <td scope="col">Base</td>
+                                            <td scope="col">12 m</td>
+                                            <td scope="col">18 m</td>
+                                            <td scope="col">24 m</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: small;">
+                                            <td>{{element.PVP | precioTasas: 0 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioTasas: 0.09| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioTasas: 0.14| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioTasas: 0.20| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        </tr>
+                                        <tr style="font-size: small;">
+                                            <th>{{element.PVP | precioTasas: 0 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                            <th>{{element.PVP | precioTasas: 0.09 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                            <th>{{element.PVP | precioTasas: 0.14 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                            <th>{{element.PVP | precioTasas: 0.20 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">Pago Mensual</td>
+                                        </tr>
+                                        <tr style="font-size: small;">
+                                            <td> </td>
+                                            <td>{{element.PVP | precioTasas: 0.09 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioTasas: 0.14 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                            <td>{{element.PVP | precioTasas: 0.20 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="badge bg-success mb-0" style="font-size: 15px; letter-spacing: 1px; font-weight: 400;">Payjoy</p>
+                                </div>
+                            </div>
+                            <hr class="mt-2 mb-5">
                         </div>
-                        <!-- -------------------------CANTIDAD,PRECIOS------------------------- -->
-                        <div class="row mx-md-5 px-md-5 align-items-center">
-                            <div class="col-3  text-center">
-                                <p class="badge bg-success">PAYJOY</p>
-                            </div>
-                            <div class="col-2  text-center">
-                                <h1 class="display-3 mb-0">{{element.CANTIDAD | number}}</h1>
-                                <span class="text-muted mt-0">Cantidad</span>
-                            </div>
-                            <div class="col-4  text-center">
-                                <h1 class="display-3 mb-0">{{element.PVP| comision: element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</h1>
-                                <span class="text-muted mt-0">Comision</span>
-                            </div>
-                            <div class="col-3  text-center">
-                                <h1 class="display-3 mb-0">{{element.PORCENTAJE | percent}}</h1>
-                                <span class="text-muted mt-0">Descuento</span>
-                            </div>
-                        </div>
-                        <div class="row mt-2 mb-2">
-                            <table class="table table-active text-center rounded">
-                                <thead class="bg-secondary text-white">
-                                    <tr>
-                                        <td scope="col">PVP</td>
-                                        <td scope="col">12 M</td>
-                                        <td scope="col">18 M</td>
-                                        <td scope="col">24 M</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="font-size: small;">
-                                        <td>{{element.PVP | precioTasas: 0 | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                        <td>{{element.PVP | precioTasas: 0.06| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                        <td>{{element.PVP | precioTasas: 0.08| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                        <td>{{element.PVP | precioTasas: 0.10| currency:'MXN': 'symbol-narrow' : '1.0-0' }}</td>
-                                    </tr>
-                                    <tr style="font-size: small;">
-                                        <th>{{element.PVP | precioTasas: 0 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
-                                        <th>{{element.PVP | precioTasas: 0.06 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
-                                        <th>{{element.PVP | precioTasas: 0.08 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
-                                        <th>{{element.PVP | precioTasas: 0.10 : element.PORCENTAJE | currency:'MXN': 'symbol-narrow' : '1.0-0' }}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <hr>
                     </div>
                 </div>
             </td>
