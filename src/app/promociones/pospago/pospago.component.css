@@ -68,3 +68,11 @@ span {
     flex: 0 0 15% !important;
     width: 15% !important;
 }
+
+.bg-table {
+    background-color: #1d3461ce;
+}
+
+.bg-marca {
+    background-color: rgb(44, 77, 143);
+}
