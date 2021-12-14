@@ -10,5 +10,5 @@ export class PrecioFinalPipe implements PipeTransform {
     const precio_final = precio_inicial + (descuento * precio_inicial)
     return precio_final;
   }
-
+  
 }
