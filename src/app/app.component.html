@@ -17,10 +17,10 @@
                 </div>
                 <div class="col-12" *ngIf="tiendaSeleccionada">
                     <hr class="d-none d-md-block">
-                    <p class="d-none d-md-inline-block display-5" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}} </p>
-                    <div class="d-none d-md-flex">
-                        <h3 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h3>
-                        <h3 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h3>
+                    <p class="d-none d-md-block display-6 text-center" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}} </p>
+                    <div class="d-none d-md-flex justify-content-center">
+                        <h4 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h4>
+                        <h4 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h4>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <h6 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h6>
                     </div>
                 </div>
-                <div class="col-12 mt-2 mt-md-4 mx-md-2">
+                <div class="col-12 mt-2 mt-md-0 mx-md-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link text-black" aria-current="page" routerLinkActive="active" routerLink="prepago">Prepago</a>
