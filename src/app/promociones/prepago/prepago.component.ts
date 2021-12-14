@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Promociones }  from "../../interface/tiendas.interface"
+import { TerminalesService } from 'src/app/services/terminales.service';
 
 const PROMOCIONES_PREPAGO: Promociones[] =[
   {
@@ -57,12 +58,48 @@ const PROMOCIONES_PREPAGO: Promociones[] =[
 })
 export class PrepagoComponent implements OnInit {
 
-  constructor() { }
-  data = PROMOCIONES_PREPAGO;
+  constructor(private terminales: TerminalesService) { 
+    this.data = this.terminales.obtenerPromocionesPrepago();
+
+    //Ordenar data
+    this.data.sort((a: any , b: any )=> {
+      if(a.PORCENTAJE == b.PORCENTAJE) return 0
+      if(a.PORCENTAJE > b.PORCENTAJE ) return 1
+      return -1
+    })
+    //Obtener Catalogo de marcas
+    for(let promo of this.data){
+      let validar = true
+      for(let marca of this.marcas){
+        if(marca == promo.MARCA) validar = false
+      }
+      if(validar) this.marcas.push(promo.MARCA)
+    }
+    this.dataSave = this.data
+    
+  }
+
+  data: any = [];
+  dataSave: any = []
+  marcas: any = [];
+
   columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
   expandedElement: Promociones[] | null;
 
   ngOnInit(): void {
   }
+
+  filtroMarca(marca: any){
+    this.data = []
+    if(marca == "Todas") this.data  = this.dataSave
+    else{
+      this.dataSave.forEach((promocion: any) => {
+        if(promocion.MARCA == marca) this.data.push(promocion)
+      });
+    }
+    console.table(this.data)
+  }
+
+
 
 }
