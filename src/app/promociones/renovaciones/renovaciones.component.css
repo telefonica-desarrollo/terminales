@@ -31,6 +31,14 @@ tr.example-element-row:not(.example-expanded-row):active {
     display: flex;
 }
 
+td.mat-cell:last-of-type {
+    padding-right: 10px !important;
+}
+
+td.mat-cell:first-of-type {
+    padding-left: 10px !important;
+}
+
 span {
     font-size: 10px;
 }
@@ -67,4 +75,12 @@ span {
     text-align: center;
     flex: 0 0 15% !important;
     width: 15% !important;
+}
+
+.bg-table {
+    background-color: #1d3461ce;
+}
+
+.bg-marca {
+    background-color: rgb(44, 77, 143);
 }
