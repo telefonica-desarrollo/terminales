@@ -28,9 +28,7 @@ export class RenovacionesComponent implements OnInit {
       return -1
     })
     this.dataSave = this.data
-    this.obtenerCatalogo()
-
-    
+    this.filtro()
   }
 
   data: any = [];
@@ -39,12 +37,13 @@ export class RenovacionesComponent implements OnInit {
   mensajeTasa: string = "De contado";
   valueTasa: number = 0;
 
-  valorPayjoy: any= false
-  valorMarcas: string | null
-  valorTasas: string | null = "0"
-  valorModelo= ""
-  valorGastoMaxmo: any = 25000;
+  valorPayjoy: any = 0;
+  valorMarcas: string = "Todas";
+  valorModelo: any = "";
+  valorGastoMaximo: any = 25000;
 
+  valorTasas: any = "0"
+  
   columnsToDisplay2 = ['MODELO', 'PRECIO_INICIAL', 'PRECIO_FINAL', 'COMISION'];
   expandedElement: Promociones[] | null;
 
@@ -54,12 +53,15 @@ export class RenovacionesComponent implements OnInit {
   obtenerCatalogo(){
     //Obtener Catalogo de marcas
     this.marcas = []
-    for(let promo of this.dataSave){
+    for(let promo of this.data){
       let validar = true
       for(let marca of this.marcas){
         if(marca == promo.MARCA) validar = false
       }
       if(validar) this.marcas.push(promo.MARCA)
+    }
+    if(this.data.length == 0 && this.valorMarcas != "Todas"){
+      this.marcas.push(this.valorMarcas)
     }
     //Ordenar Catalogo de marcas
     this.marcas.sort()
@@ -68,51 +70,51 @@ export class RenovacionesComponent implements OnInit {
     //Obtener Data guardada
     if(localStorage.getItem("tasa_renovacion")){
       this.valorTasas = localStorage.getItem("tasa_renovacion")
-      this.filtroTasa(this.valorTasas)
     }
     if(localStorage.getItem("marca_renovacion")){
-      this.valorMarcas = localStorage.getItem("marca_renovacion")
-      this.filtroMarca(this.valorMarcas)
+      const marca: any = localStorage.getItem("marca_renovacion")
+      this.valorMarcas = marca
     }
     if(localStorage.getItem("payjoy_renovacion")){
       this.valorPayjoy = localStorage.getItem("payjoy_renovacion")
     }
+    this.filtro()
+  }
+  obtenerMarca(e: any){
+    this.valorMarcas = e
+    this.filtro()
+  }
+  obtenerGastoMaximo(e: any){
+    this.valorGastoMaximo = e
+    this.filtro()
+  }
+  guardarData(){
   }
 
   //FILTROOOOOOOOOOOS
-
-  filtroModelo(){
+  filtro(){
+    this.data  = this.dataSave
+    
     const modelo = this.valorModelo.toLowerCase();
     const marca = this.valorMarcas;
-    if(marca == "Todas"){
-      this.data  = this.dataSave
-      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo))
-    }
-    else{
-      this.data = this.dataSave.filter((data: any) => data.MARCA == marca &&  data.MODELO.toLowerCase().includes(modelo))
-    }
-  }
-
-  filtroMarca(marca: any){
-    const modelo = this.valorModelo.toLowerCase();
-    localStorage.setItem("marca_renovacion", marca);
-    this.valorMarcas = marca;
+    const payjoy = this.valorPayjoy;
+    const gasto = this.valorGastoMaximo;
 
     if(marca == "Todas"){
-      this.data  = this.dataSave
-      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo))
+      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo) && 
+                                                      data.PVP < gasto)
+      this.obtenerCatalogo();
     }
     else{
-      this.data = this.dataSave.filter((data: any) => data.MARCA == marca &&  data.MODELO.toLowerCase().includes(modelo))
+      this.data = this.dataSave.filter((data: any) => data.MODELO.toLowerCase().includes(modelo) &&
+                                                      data.PVP < gasto)
+      this.obtenerCatalogo();
+      this.data = this.data.filter((data: any)=> data.MARCA == marca)
     }
+    //Validacion de payjoy ... 
   }
-  filtroPayjoy(){
-    localStorage.setItem("payjoy_renovacion", this.valorPayjoy);
-  }
-
-  //DATA CAMBIA
-
   filtroTasa(tasa: any){
+  
     if(tasa == 0){
       this.mensajeTasa = "de contado"
       this.valueTasa = 0 
@@ -139,10 +141,7 @@ export class RenovacionesComponent implements OnInit {
 
     return value;
   }
-  valorCambia(e: any){
-    this.valorGastoMaxmo = e
-    console.log(e);
-  }
+  
   
   
 }
