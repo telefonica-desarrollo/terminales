@@ -1,0 +1,29 @@
+.loginCarta {
+    height: 100%;
+    background-color: white;
+    animation-name: animacion1;
+    animation-duration: 1s;
+}
+
+button {
+    background-color: #17386d;
+    color: white;
+}
+
+.imagenCamara {
+    filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.7));
+}
+
+input,
+select {
+    background-color: #e2e2e2;
+}
+
+@keyframes animacion1 {
+    from {
+        left: -500px;
+    }
+    to {
+        left: 0px;
+    }
+}
