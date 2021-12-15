@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import {PrepagoComponent} from "./promociones/prepago/prepago.component"
 import {PospagoComponent} from "./promociones/pospago/pospago.component"
 import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.component';
