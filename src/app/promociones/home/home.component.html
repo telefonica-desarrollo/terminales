@@ -21,19 +21,7 @@
         <div class="col-12 col-md-8">
             <div class="row bg-cp rounded align-items-center mt-5 mt-md-0">
                 <app-info-tienda [tienda]="tiendaSeleccionada" [mostrar]="true"></app-info-tienda>
-                <div class="col-12 mt-2 mt-md-0 mx-md-2">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link text-black" aria-current="page" routerLinkActive="active" routerLink="prepago">Prepago</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" aria-current="page" routerLink="pospago" routerLinkActive="active">Pospago</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black" aria-current="page" routerLink="renovaciones" routerLinkActive="active">Renovación</a>
-                        </li>
-                    </ul>
-                </div>
+                <app-navtabs></app-navtabs>
                 <hr>
                 <div class="col-12 my-2 pb-3">
                     <router-outlet></router-outlet>
