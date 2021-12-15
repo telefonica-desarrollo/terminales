@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2'
 
 
 
@@ -18,7 +19,16 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    alert("hola")
+    if(this.usuario.user =="Jesus" && this.usuario.password == "1234"){
+      this.router.navigate(["/home/prepago"])
+    }else{
+      Swal.fire({
+        text: 'El usuario o contraseña son incorrectos',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000,
+      })
+    }
     
     // this.service.obtenerLogin(this.usuario).subscribe(
     //   res => {
