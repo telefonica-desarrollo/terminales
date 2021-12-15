@@ -9,9 +9,13 @@ import { PrepagoComponent } from './prepago/prepago.component';
 import { PospagoComponent } from './pospago/pospago.component';
 import { RenovacionesComponent } from './renovaciones/renovaciones.component';
 import { HomeComponent } from './home/home.component';
+import { InfoTiendaComponent } from './shared/info-tienda/info-tienda.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+
 import { PipesModule } from '../pipes/pipes.module';
 import { AngMaterialModule } from '../ang-material-module/ang-material.module';
-import { AppRoutingModule } from '../app-routing.module';
+import { NavtabsComponent } from './shared/navtabs/navtabs.component';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +23,19 @@ import { AppRoutingModule } from '../app-routing.module';
     PospagoComponent,
     RenovacionesComponent,
     HomeComponent,
+
+    InfoTiendaComponent,
+    NavbarComponent,
+    NavtabsComponent
   ],
   imports: [
     CommonModule,
-    PipesModule,
-    AngMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    
+    PipesModule,
+    AngMaterialModule,
   ]
 })
 export class PromocionesModule { }

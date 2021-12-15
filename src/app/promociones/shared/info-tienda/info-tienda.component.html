@@ -1,0 +1,15 @@
+<div class="col-12" *ngIf="tienda && !mostrar">
+    <hr class="d-none d-md-block">
+    <p class="d-none d-md-block display-6 text-center" style="font-weight: 100;">{{tienda.TIENDA}} </p>
+    <div class="d-none d-md-flex justify-content-center">
+        <h4 class="mx-sm-2 badge shadow bg-dark">{{tienda.TERRITORIO}}</h4>
+        <h4 class="ms-1 badge shadow bg-secondary">{{tienda.IDPDV}}</h4>
+    </div>
+</div>
+<div class="col-12 d-sm-flex align-items-center justify-content-between mb-1 mt-4" *ngIf="tienda && mostrar">
+    <p class="d-block d-md-none  display-5" style="font-weight: 100;">{{tienda.TIENDA}}</p>
+    <div class="d-flex d-md-none">
+        <h6 class="mx-sm-2 badge shadow bg-dark">{{tienda.TERRITORIO}}</h6>
+        <h6 class="ms-1 badge shadow bg-secondary">{{tienda.IDPDV}}</h6>
+    </div>
+</div>

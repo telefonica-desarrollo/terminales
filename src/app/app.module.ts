@@ -13,19 +13,19 @@ import { PipesModule } from './pipes/pipes.module';
 //Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarComponent } from './promociones/shared/navbar/navbar.component';
 
 //Angular Fire
 import { environment } from "../environments/environment"
 import { AngularFireModule } from '@angular/fire/compat';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { InfoTiendaComponent } from './promociones/shared/info-tienda/info-tienda.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent,
   ],
   imports: [
     BrowserModule,

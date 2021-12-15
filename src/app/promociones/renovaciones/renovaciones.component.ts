@@ -29,7 +29,7 @@ export class RenovacionesComponent implements OnInit {
     })
     this.dataSave = this.data
     this.filtro()
-  }
+  } 
 
   data: any = [];
   dataSave: any = []

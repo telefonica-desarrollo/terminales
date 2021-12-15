@@ -15,25 +15,12 @@
                         </mat-autocomplete>
                     </mat-form-field>
                 </div>
-                <div class="col-12" *ngIf="tiendaSeleccionada">
-                    <hr class="d-none d-md-block">
-                    <p class="d-none d-md-block display-6 text-center" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}} </p>
-                    <div class="d-none d-md-flex justify-content-center">
-                        <h4 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h4>
-                        <h4 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h4>
-                    </div>
-                </div>
+                <app-info-tienda [tienda]="tiendaSeleccionada" [mostrar]="false"></app-info-tienda>
             </div>
         </div>
         <div class="col-12 col-md-8">
             <div class="row bg-cp rounded align-items-center mt-5 mt-md-0">
-                <div class="col-12  d-sm-flex align-items-center justify-content-between mb-1 mt-4" *ngIf="tiendaSeleccionada">
-                    <p class="d-block d-md-none  display-5" style="font-weight: 100;">{{tiendaSeleccionada.TIENDA}}</p>
-                    <div class="d-flex d-md-none">
-                        <h6 class="mx-sm-2 badge shadow bg-dark">{{tiendaSeleccionada.TERRITORIO}}</h6>
-                        <h6 class="ms-1 badge shadow bg-secondary">{{tiendaSeleccionada.IDPDV}}</h6>
-                    </div>
-                </div>
+                <app-info-tienda [tienda]="tiendaSeleccionada" [mostrar]="true"></app-info-tienda>
                 <div class="col-12 mt-2 mt-md-0 mx-md-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
