@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {Router} from "@angular/router"
 import {map, retry, startWith} from 'rxjs/operators';
 
 
@@ -30,21 +31,17 @@ export class HomeComponent implements OnInit {
 
   valor: any;
 
-  constructor(public _tiendas: TiendasService) {
-    // this._tiendas.obtenerTiendas().subscribe((data)=>{
-    //   this.tiendas = data as Tienda[]
-    //   console.log(this.tiendas);
-    // })
-
+  constructor(public _tiendas: TiendasService, private router: Router) {
     this.tiendas = this._tiendas.tiendas;
     console.log(this.tiendas);
-    
-    
+
     this.stateCtrl.valueChanges.subscribe((tienda)=> {
+      this.router.navigate(["home"])
       this.tiendaSeleccionada = null;
       this.tiendas.forEach((btienda)=> {
         if(btienda.IDPDV === tienda){
           this.tiendaSeleccionada = btienda
+          this.router.navigate(["home/prepago"])
           localStorage.setItem("idpdv", this.tiendaSeleccionada.IDPDV)
         }
       })
