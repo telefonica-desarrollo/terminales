@@ -18,12 +18,6 @@
     color: #f0e8f6;
 }
 
-.container-fluid {
-    /* background: #211e30; */
-    background: linear-gradient(180deg, #0e1a30 0%, #1D3461 10%);
-    /* height: 100% !importan; */
-}
-
 .bg-cp {
     background-color: #f3f3f3;
 }

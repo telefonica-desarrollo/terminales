@@ -9,6 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -18,7 +19,8 @@ const AngularMaterialModule: any = [
   MatTabsModule,
   MatTableModule,
   MatExpansionModule,
-  MatSliderModule
+  MatSliderModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({
