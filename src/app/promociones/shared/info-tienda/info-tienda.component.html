@@ -13,3 +13,9 @@
         <h6 class="ms-1 badge shadow bg-secondary">{{tienda.IDPDV}}</h6>
     </div>
 </div>
+<div class="col-12" *ngIf="!tienda && !mostrar">
+    <p class="display-5 text-muted text-center">Bienvenido</p>
+    <p class="text-muted text-center" style="font-size: medium; font-weight: lighter;">Ingrese un punto de venta</p>
+</div>
+<div class="col-12 d-sm-flex mb-1 mt-4" *ngIf="!tienda && mostrar">
+</div>
