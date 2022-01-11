@@ -9,6 +9,9 @@ import * as Exceljs from "exceljs"
 export class PromocionesPospagoComponent implements OnInit {
 
   nombreDocumento: string = ""
+  error: boolean = false;
+  statusTexto: string = "Documento Leído"
+  status: number = 0;
 
   constructor() { }
 
@@ -16,8 +19,8 @@ export class PromocionesPospagoComponent implements OnInit {
   }
   obtenerArchivo(event: any){
     const file = event.target.files[0];
-    
     const reader = new FileReader();
+
     reader.readAsArrayBuffer(file)
     reader.onload = () => {
       const buffer: any = reader.result;
@@ -33,11 +36,23 @@ export class PromocionesPospagoComponent implements OnInit {
             console.log({nombre, apellido});
           }
         })
-      }).catch(()=> console.log("valio verga"))
+      }).catch(()=> {
+        this.error= true 
+        this.nombreDocumento=""
+      })
 
     }
     
     
+  }
+  badgeClass(){
+    if(this.status == 0) return "bg-secondary"
+    if(this.status == 1) return "bg-success"
+    if(this.status == 2) return "bg-danger"
+    return ""
+  }
+  cargarData(){
+    this.status=1 
   }
 
 }
