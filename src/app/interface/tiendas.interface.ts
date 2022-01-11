@@ -27,3 +27,10 @@ export interface tienda {
     TERRITORIO: string;
     IDPDV: string;
 }
+export interface Promocion {
+    MARCA: string;
+    PRECIO_INICIAL: number;
+    PRECIO_FINAL: number;
+    CANTIDAD?: number;
+    DESCUENTO: number;
+}

@@ -10,6 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 const AngularMaterialModule: any = [
   MatSelectModule,
@@ -20,7 +21,8 @@ const AngularMaterialModule: any = [
   MatTableModule,
   MatExpansionModule,
   MatSliderModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatIconModule
 ]
 
 @NgModule({

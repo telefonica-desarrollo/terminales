@@ -6,6 +6,7 @@ import {PospagoComponent} from "./promociones/pospago/pospago.component"
 import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.component';
 import { HomeComponent } from './promociones/home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PagePrincipalComponent } from './cargar-prom/page-principal/page-principal.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,8 @@ const routes: Routes = [
     {path: "pospago", component: PospagoComponent},
     {path: "renovaciones", component: RenovacionesComponent},
   ]},
+  {path: "cargar/terminales", component: PagePrincipalComponent},
+  
   {path: "**", redirectTo: "login"}
 ];
 

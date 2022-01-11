@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { InfoTiendaComponent } from './promociones/shared/info-tienda/info-tienda.component';
+import { CargarPromModule } from './cargar-prom/cargar-prom.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { InfoTiendaComponent } from './promociones/shared/info-tienda/info-tiend
     AppRoutingModule,
     AngMaterialModule,
     PromocionesModule,
+    CargarPromModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
