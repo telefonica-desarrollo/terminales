@@ -14,9 +14,13 @@
                 </div>
                 <div class="row pe-3">
                     <div class="col" *ngIf="nombreDocumento.length == 0">
-                        <p class="lead" *ngIf="!error">
+                        <p class="lead" *ngIf="!error && !loading">
                             <mat-icon class="text-muted" style="vertical-align: text-bottom !important;">arrow_back_ios</mat-icon>
                             Ingrese por favor el documento...
+                        </p>
+                        <p class="lead" *ngIf="!error && loading">
+                            <mat-spinner [diameter]="25" class="d-inline-block me-2"></mat-spinner>
+                            Leyendo documento, espere..
                         </p>
                         <p class="lead text-danger" *ngIf="error">
                             <mat-icon class="text-muted" style="vertical-align: text-bottom !important;">arrow_back_ios</mat-icon>
@@ -39,9 +43,28 @@
                 </div>
             </div>
         </div>
-        <div class="row ">
-            <div class="col rounded" style="height: 300px; background-color: rgba(0, 0, 0, 0.1);">
-
+        <div class="row justify-content-center pb-3" style=" background-color: rgba(0, 0, 0, 0.1);" *ngIf="archivoAltas.length>0">
+            <div class=" col-10 rounded mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col-3">IDRED</th>
+                            <th scope="col-3">IDPDV</th>
+                            <th scope="col-3">SOCIO</th>
+                            <th scope="col">CUOTA PREPAGO</th>
+                            <th scope="col">ALTA PREPAGO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let alta of archivoAltas">
+                            <th scope="row">{{alta.idred}}</th>
+                            <td>{{alta.idpdv}}</td>
+                            <td>{{alta.socio}}</td>
+                            <td>{{alta.cuotaPrepago | number: '1.0-0'}}</td>
+                            <td>{{alta.altasPrepago}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

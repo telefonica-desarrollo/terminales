@@ -19,16 +19,21 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    if(this.usuario.user =="Jesus" && this.usuario.password == "1234"){
+    if(this.usuario.user == "admin" && this.usuario.password == "123"){
+      this.router.navigate(["/cargar/terminales"])
+      return
+    }
+    if(this.usuario.user =="Jesus" && this.usuario.password == "123"){
       this.router.navigate(["/home/prepago"])
-    }else{
+      return
+    }
+
       Swal.fire({
         text: 'El usuario o contraseña son incorrectos',
         icon: 'error',
         showConfirmButton: false,
         timer: 2000,
       })
-    }
     
     // this.service.obtenerLogin(this.usuario).subscribe(
     //   res => {

@@ -11,7 +11,9 @@ export class DocAltasComponent implements OnInit {
   nombreDocumento: string = ""
   error: boolean = false
   status: boolean = false
+  loading: boolean = false;
   numeroLineas: number = 0;
+  archivoAltas: any = []
 
   constructor() { }
 
@@ -21,6 +23,7 @@ export class DocAltasComponent implements OnInit {
   obtenerArchivo(event: any){
     const file = event.target.files[0];
     const reader = new FileReader();
+    this.loading = true
 
     reader.readAsArrayBuffer(file)
     reader.onload = () => {
@@ -28,15 +31,26 @@ export class DocAltasComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("Hoja1");
+        var woorksheet = woorkbook.getWorksheet("Estructura");
+        this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
-          if(rowNumber>1){
-            this.nombreDocumento = file.name
-            const nombre = row.getCell(1).value;
-            const apellido = row.getCell(2).value;
-            console.log({nombre, apellido});
+          if(rowNumber>4){
+            let user: any= {};
+            const socio = row.getCell(11).value
+            if(socio == "TEKNEI" || socio =="TEMM"){
+              user.socio = socio;
+              user.idpdv = row.getCell(9).value
+              user.idred = row.getCell(14).value
+              user.cuotaPrepago = row.getCell(16).value
+              user.cuotaPospago = row.getCell(17).value
+              user.cuotaIlimitado = row.getCell(18).value
+              user.altasPrepago = row.getCell(19).value
+              user.altasPospago = row.getCell(20).value
+              user.altasIlimitado = row.getCell(21).value
+              this.archivoAltas.push(user)
+            }
+            this.numeroLineas++
           }
-          this.numeroLineas = rowNumber;
         })
       }).catch(()=> {
         this.error= true 

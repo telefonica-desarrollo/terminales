@@ -12,6 +12,7 @@ export class InventarioComponent implements OnInit {
   nombreDocumento: string = ""
   error: boolean = false
   status: boolean = false
+  loading: boolean = false;
   numeroLineas: number = 0;
 
   constructor() { }
@@ -22,6 +23,8 @@ export class InventarioComponent implements OnInit {
   obtenerArchivo(event: any){
     const file = event.target.files[0];
     const reader = new FileReader();
+    this.loading = true
+
 
     reader.readAsArrayBuffer(file)
     reader.onload = () => {
