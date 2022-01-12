@@ -1,27 +1,45 @@
-<div class="container">
-    <div class="row design-title rounded">
-        <p class="text-white p-3 mt-2 h3" style="font-weight: 500;">Carga de información</p>
-    </div>
-    <div class="row mt-2 g-3">
-        <div class="col">
-            <app-promociones-prepago></app-promociones-prepago>
+<div class="fondo">
+    <div class="container pt-2">
+        <div class="row design-title rounded">
+            <p class="text-white p-3 mt-2 h5" style="font-weight: 500; letter-spacing: 5px;">Terminales</p>
         </div>
-        <div class="col">
-            <app-promociones-pospago></app-promociones-pospago>
-        </div>
-        <div class="col">
-            <app-promociones-pospago></app-promociones-pospago>
-        </div>
-    </div>
-    <div class="row mt-2 g-3">
-        <div class="col-4">
-            <app-promociones-pospago></app-promociones-pospago>
-        </div>
-        <div class="col-8">
-            <div class="card p-5">
-                Hola mundo
+        <hr>
+        <div class="row g-3">
+            <div class="card">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <img src="../../../assets/work.png" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-5">
+                        <div class="row">
+                            Inventario
+                        </div>
+                        <hr>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <hr>
+        <div class="row g-3">
+            <div class="col">
+                <app-promociones-prepago></app-promociones-prepago>
+            </div>
+            <div class="col">
+                <app-promociones-pospago></app-promociones-pospago>
+            </div>
+            <div class="col">
+                <app-promociones-renovacion></app-promociones-renovacion>
+            </div>
+        </div>
+        <hr>
+        <div class="row  g-3">
+            <div class="col-4">
+                <app-promociones-pospago></app-promociones-pospago>
+            </div>
+            <div class="col-8">
 
+            </div>
+        </div>
+
+    </div>
 </div>
