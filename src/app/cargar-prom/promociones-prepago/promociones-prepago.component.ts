@@ -8,6 +8,7 @@ import * as Exceljs from "exceljs"
 })
 export class PromocionesPrepagoComponent implements OnInit {
   nombreDocumento: string = ""
+  numeroPromociones: number = 0
   error: boolean = false;
   statusTexto: string = "Documento Leído"
   status: number = 0;
@@ -26,13 +27,14 @@ export class PromocionesPrepagoComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("Hoja1");
+        var woorksheet = woorkbook.getWorksheet("PROMOCIONES");
+        this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
-          if(rowNumber>1){
-            this.nombreDocumento = file.name
-            const nombre = row.getCell(1).value;
-            const apellido = row.getCell(2).value;
-            console.log({nombre, apellido});
+          if(rowNumber>7){
+            // const nombre = row.getCell(1).value;
+            // const apellido = row.getCell(2).value;
+            // console.log({nombre, apellido});
+            this.numeroPromociones++
           }
         })
       }).catch(()=> {
@@ -52,5 +54,6 @@ export class PromocionesPrepagoComponent implements OnInit {
   }
   cargarData(){
     this.status=1 
+    this.statusTexto = "Carga exitosa."
   }
 }

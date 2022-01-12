@@ -29,15 +29,15 @@ export class InventarioComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("Hoja1");
+        var woorksheet = woorkbook.getWorksheet("Sheet1");
+        this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
           if(rowNumber>1){
-            this.nombreDocumento = file.name
-            const nombre = row.getCell(1).value;
-            const apellido = row.getCell(2).value;
-            console.log({nombre, apellido});
+            // const nombre = row.getCell(1).value;
+            // const apellido = row.getCell(2).value;
+            // console.log({nombre, apellido});
+            this.numeroLineas++;
           }
-          this.numeroLineas = rowNumber;
         })
       }).catch(()=> {
         this.error= true 
