@@ -22,11 +22,15 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { InfoTiendaComponent } from './promociones/shared/info-tienda/info-tienda.component';
 import { CargarPromModule } from './cargar-prom/cargar-prom.module';
+import { PagePrincipalComComponent } from './carga-com/page-principal-com/page-principal-com.component';
+import { DocAltasComponent } from './carga-com/doc-altas/doc-altas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    PagePrincipalComComponent,
+    DocAltasComponent,
   ],
   imports: [
     BrowserModule,

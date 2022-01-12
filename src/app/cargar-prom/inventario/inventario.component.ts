@@ -9,6 +9,11 @@ import * as Exceljs from "exceljs"
 })
 export class InventarioComponent implements OnInit {
 
+  nombreDocumento: string = ""
+  error: boolean = false
+  status: boolean = false
+  numeroLineas: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,20 +32,23 @@ export class InventarioComponent implements OnInit {
         var woorksheet = woorkbook.getWorksheet("Hoja1");
         woorksheet.eachRow((row, rowNumber) => {
           if(rowNumber>1){
-            // this.nombreDocumento = file.name
+            this.nombreDocumento = file.name
             const nombre = row.getCell(1).value;
             const apellido = row.getCell(2).value;
             console.log({nombre, apellido});
           }
+          this.numeroLineas = rowNumber;
         })
       }).catch(()=> {
-        // this.error= true 
-        // this.nombreDocumento=""
+        this.error= true 
+        this.nombreDocumento=""
+        this.status = false;
       })
-
     }
-    
-    
+  }
+
+  statusInfo(){
+    this.status= true;
   }
 
 }
