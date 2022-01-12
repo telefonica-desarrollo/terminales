@@ -20,17 +20,16 @@ import { environment } from "../environments/environment"
 import { AngularFireModule } from '@angular/fire/compat';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { InfoTiendaComponent } from './promociones/shared/info-tienda/info-tienda.component';
+
 import { CargarPromModule } from './cargar-prom/cargar-prom.module';
-import { PagePrincipalComComponent } from './carga-com/page-principal-com/page-principal-com.component';
-import { DocAltasComponent } from './carga-com/doc-altas/doc-altas.component';
+import { CargaComModule } from './carga-com/carga-com.module';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PagePrincipalComComponent,
-    DocAltasComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,11 +37,13 @@ import { DocAltasComponent } from './carga-com/doc-altas/doc-altas.component';
     
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
     AppRoutingModule,
     AngMaterialModule,
     PromocionesModule,
     CargarPromModule,
+    CargaComModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

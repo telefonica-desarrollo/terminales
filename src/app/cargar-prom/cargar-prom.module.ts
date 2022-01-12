@@ -6,6 +6,7 @@ import { PromocionesPospagoComponent } from './promociones-pospago/promociones-p
 import { PromocionesRenovacionComponent } from './promociones-renovacion/promociones-renovacion.component';
 import { AngMaterialModule } from '../ang-material-module/ang-material.module';
 import { InventarioComponent } from './inventario/inventario.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { InventarioComponent } from './inventario/inventario.component';
   ],
   imports: [
     CommonModule,
-    AngMaterialModule
+    AngMaterialModule,
+    RouterModule
   ]
 })
 export class CargarPromModule { }

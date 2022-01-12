@@ -7,6 +7,7 @@ import { RenovacionesComponent } from './promociones/renovaciones/renovaciones.c
 import { HomeComponent } from './promociones/home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PagePrincipalComponent } from './cargar-prom/page-principal/page-principal.component';
+import { PagePrincipalComComponent } from './carga-com/page-principal-com/page-principal-com.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: "renovaciones", component: RenovacionesComponent},
   ]},
   {path: "cargar/terminales", component: PagePrincipalComponent},
+  {path: "cargar/comisiones", component: PagePrincipalComComponent},
   
   {path: "**", redirectTo: "login"}
 ];
