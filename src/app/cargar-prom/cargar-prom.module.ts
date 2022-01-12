@@ -5,6 +5,7 @@ import { PromocionesPrepagoComponent } from './promociones-prepago/promociones-p
 import { PromocionesPospagoComponent } from './promociones-pospago/promociones-pospago.component';
 import { PromocionesRenovacionComponent } from './promociones-renovacion/promociones-renovacion.component';
 import { AngMaterialModule } from '../ang-material-module/ang-material.module';
+import { InventarioComponent } from './inventario/inventario.component';
 
 
 
@@ -13,7 +14,8 @@ import { AngMaterialModule } from '../ang-material-module/ang-material.module';
     PagePrincipalComponent,
     PromocionesPrepagoComponent,
     PromocionesPospagoComponent,
-    PromocionesRenovacionComponent
+    PromocionesRenovacionComponent,
+    InventarioComponent
   ],
   imports: [
     CommonModule,
