@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class BackendService {
 
-  constructor() { }
+  private rutaApi: string = "localhost:3000"
+
+  constructor(private http: HttpClient) { }
+
+  obtenerTienda(){
+    return this.http.get(`${this.rutaApi}/obtener/tiendas`);
+  }
+
+
+
+  
 }
