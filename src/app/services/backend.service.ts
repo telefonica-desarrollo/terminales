@@ -13,6 +13,10 @@ export class BackendService {
   obtenerTienda(){
     return this.http.get(`${this.rutaApi}/obtener/tiendas`);
   }
+  obtenerPromocionesPrepago(){
+    return this.http.get(`${this.rutaApi}/obtener/promociones/prepago`);
+  }
+  
 
 
 
