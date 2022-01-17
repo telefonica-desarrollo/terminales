@@ -10,11 +10,52 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerTienda(){
-    return this.http.get(`${this.rutaApi}/obtener/tiendas`);
+  login(data: any){
+    return this.http.post(`${this.rutaApi}/login`, data)
   }
+
+  //TIENDAS
+  obtenerTiendas(){
+    return this.http.get(`${this.rutaApi}/obtener/tiendas`)
+  }
+  agregarTienda(data: any){
+    return this.http.post(`${this.rutaApi}/login`, data)
+  }
+
+  //TERMINALES
+  obtenerTerminales(){
+    return this.http.get(`${this.rutaApi}/obtener/terminales`);
+  }
+  agregarTerminales(data: any){
+    return this.http.post(`${this.rutaApi}/agregar/terminal`, data)
+  }
+
+  //PROMOCIONES
   obtenerPromocionesPrepago(){
     return this.http.get(`${this.rutaApi}/obtener/promociones/prepago`);
+  }
+  obtenerPromocionesPospago(){
+    return this.http.get(`${this.rutaApi}/obtener/promociones/pospago`);
+  }
+  obtenerPromocionesRenovacion(){
+    return this.http.get(`${this.rutaApi}/obtener/promociones/renovacion`);
+  }
+  agregarPromocionPrepago(data: any){
+    return this.http.post(`${this.rutaApi}/agregar/promociones/prepago`, data)
+  }
+  agregarPromocionPospago(data: any){
+    return this.http.post(`${this.rutaApi}/agregar/promociones/pospago`, data)
+  }
+  agregarPromocionRenovacion(data: any){
+    return this.http.post(`${this.rutaApi}/agregar/promociones/renovacion`, data)
+  }
+
+  //INVENTARIO
+  agregarInventario(data: any){
+    return this.http.post(`${this.rutaApi}/agregar/inventario`, data)
+  }
+  obtenerInventario(data: any){
+    return this.http.post(`${this.rutaApi}/obtener/inventario`, data)
   }
   
 

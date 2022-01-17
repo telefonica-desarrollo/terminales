@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2'
+import { BackendService } from '../services/backend.service';
 
 
 
@@ -11,11 +12,22 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private be_servide: BackendService) { }
 
   usuario= {user: 'Jesus', password: '123'}
+  nusuario= {user: "", password: ""}
   
   ngOnInit() {
+  }
+
+  nLogin(){
+    this.be_servide.login(this.nusuario).subscribe((data) => {
+      if(data){
+        this.router.navigate(["/home/prepago"])
+      }else{
+        alert("Usuario no encontrado")
+      }
+    })
   }
 
   Login() {
