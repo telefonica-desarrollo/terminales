@@ -12,52 +12,39 @@ import { BackendService } from '../services/backend.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private be_servide: BackendService) { }
+  constructor(private router: Router, private be_service: BackendService) { }
 
-  usuario= {user: 'Jesus', password: '123'}
-  nusuario= {user: "", password: ""}
+  usuario= {Usuario: 'Luis', Password: '1234'}
   
   ngOnInit() {
   }
 
   nLogin(){
-    this.be_servide.login(this.nusuario).subscribe((data) => {
+    if(this.usuario.Usuario == "admin" && this.usuario.Password == "123"){
+      this.router.navigate(["/cargar/terminales"])
+      return
+    }
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: "info",
+      text: "Cargando"
+    })
+    Swal.showLoading();
+
+    this.be_service.login(this.usuario).subscribe((data) => {
       if(data){
+        Swal.close();
         this.router.navigate(["/home/prepago"])
       }else{
-        alert("Usuario no encontrado")
+        Swal.fire({
+          title: "Error al ingresar",
+          text: "Ingrese bien los datos",
+          icon: "error",
+          confirmButtonText: "Ok",
+        })
       }
     })
   }
 
-  Login() {
-    if(this.usuario.user == "admin" && this.usuario.password == "123"){
-      this.router.navigate(["/cargar/terminales"])
-      return
-    }
-    if(this.usuario.user =="Jesus" && this.usuario.password == "123"){
-      this.router.navigate(["/home/prepago"])
-      return
-    }
-
-      Swal.fire({
-        text: 'El usuario o contraseña son incorrectos',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 2000,
-      })
-    
-    // this.service.obtenerLogin(this.usuario).subscribe(
-    //   res => {
-    //     const data: any = res;
-    //     if (data.usuarioExiste) {
-    //       localStorage.setItem("idUsuario", data.idUsuario)
-    //       this.router.navigateByUrl("inicio")  
-    //     } else {
-    //       alertify.notify("Usuario o contraseña incorrectos.")
-    //     }
-    //   },
-    //   err => { }
-    // )
-  }
 }

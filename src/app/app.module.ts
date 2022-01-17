@@ -24,6 +24,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { CargarPromModule } from './cargar-prom/cargar-prom.module';
 import { CargaComModule } from './carga-com/carga-com.module';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    HttpClientModule,
 
     AppRoutingModule,
     AngMaterialModule,
