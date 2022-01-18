@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   nLogin(){
     if(this.usuario.Usuario == "admin" && this.usuario.Password == "123"){
-      this.router.navigate(["/cargar/terminales"])
+      this.router.navigate(["/cargar"])
       return
     }
 

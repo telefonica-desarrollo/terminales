@@ -1,9 +1,10 @@
 .custom-file {
     padding: 0;
-    border: dotted 3px rgba(0, 0, 0, 0.10);
+    border: dotted 3px rgba(0, 0, 0, 0.40);
     text-align: center;
     position: relative;
     overflow: hidden;
+    background-color: white;
 }
 
 .badge {
