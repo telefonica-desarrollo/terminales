@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     this.be_service.login(this.usuario).subscribe((data) => {
       if(data){
         Swal.close();
-        this.router.navigate(["/home/prepago"])
+        localStorage.setItem("Usuario", this.usuario.Usuario)
+        this.router.navigate(["/home"])
       }else{
         Swal.fire({
           title: "Error al ingresar",

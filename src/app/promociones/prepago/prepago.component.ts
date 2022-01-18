@@ -58,8 +58,11 @@ const PROMOCIONES_PREPAGO: Promociones[] =[
 })
 export class PrepagoComponent implements OnInit {
 
+  hola: string | null;
+
   constructor(private terminales: TerminalesService) { 
     this.data = this.terminales.obtenerPromocionesPrepago();
+    this.hola = localStorage.getItem("Id_Tienda")
 
     //Ordenar data
     this.data.sort((a: any , b: any )=> {

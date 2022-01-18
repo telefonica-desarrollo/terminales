@@ -14,6 +14,12 @@ export class BackendService {
     return this.http.post(`${this.rutaApi}/login`, data)
   }
 
+  //USUARIOS
+  obtenerUsuario(usuario: any){
+    const data=  {usuario: usuario}
+    return this.http.post(`${this.rutaApi}/obtener/usuario`, data)
+  }
+
   //TIENDAS
   obtenerTiendas(){
     return this.http.get(`${this.rutaApi}/obtener/tiendas`)

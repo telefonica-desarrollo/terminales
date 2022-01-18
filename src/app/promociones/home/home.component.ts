@@ -7,6 +7,7 @@ import {map, retry, startWith} from 'rxjs/operators';
 
 import { Tienda } from './../../interface/tiendas.interface';
 import { TiendasService } from './../../services/tiendas.service';
+import { BackendService } from 'src/app/services/backend.service';
 
 export interface State {
   flag: string;
@@ -23,48 +24,27 @@ export interface State {
 export class HomeComponent implements OnInit {
 
   title = 'proyecto';
-  stateCtrl = new FormControl();
-
-  filtroTiendas: Observable<Tienda[]>;
-  tiendas: Tienda[] = []
+  usuarioLocal: string | null = "";
+  usuario = []
   tiendaSeleccionada: any;
 
   valor: any;
 
-  constructor(public _tiendas: TiendasService, private router: Router) {
-    this.tiendas = this._tiendas.tiendas;
-    console.log(this.tiendas);
-
-    this.stateCtrl.valueChanges.subscribe((tienda)=> {
-      this.router.navigate(["home"])
-      this.tiendaSeleccionada = null;
-      this.tiendas.forEach((btienda)=> {
-        if(btienda.IDPDV === tienda){
-          this.tiendaSeleccionada = btienda
-          this.router.navigate(["home/prepago"])
-          localStorage.setItem("idpdv", this.tiendaSeleccionada.IDPDV)
-        }
-      })
-    })
-
-    this.filtroTiendas = this.stateCtrl.valueChanges.pipe(
-      startWith(""),
-      map(tienda => this._filtroTiendas(tienda)),
-    )
-
-    if(localStorage.getItem("idpdv")){
-      this.stateCtrl.setValue(Number(localStorage.getItem("idpdv")))
-    }
-
+  constructor(private router: Router, private be_service: BackendService) {
   }
-
-  private _filtroTiendas(value: string): Tienda[] {
-    const filtroValor = value.toString().toLowerCase();
-    return this.tiendas.filter(tienda => tienda.IDPDV.toString().includes(filtroValor) || tienda.TIENDA?.toLowerCase().includes(filtroValor))
-  }
-
-
   ngOnInit(): void {
+    this.usuarioLocal = localStorage.getItem("Usuario")
+    this.be_service.obtenerUsuario(this.usuarioLocal).subscribe((data: any)=>{
+      console.log(data);
+      this.tiendaSeleccionada = {
+        TERRITORIO: data.Territorio,
+        TIENDA: data.Nombre_Tienda,
+        IDPDV: data.Idpdv
+      }
+      this.usuario;
+      localStorage.setItem("Id_Tienda", data.Id_Tienda)
+      this.router.navigate(["/home/prepago"])    
+    })
   }
 
 }

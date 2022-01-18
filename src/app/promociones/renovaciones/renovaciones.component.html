@@ -1,60 +1,68 @@
-<div class="row mx-1 mb-2 bg-white pt-4 rounded">
-    <!-- PAYJOY -->
-    <div class="col-6 col-md-3 order-2 order-md-1">
-        <mat-form-field appearance="fill" style="width: 100%;">
-            <mat-label>Payjoy</mat-label>
-            <mat-select value=0>
-                <mat-option value="0">Todos</mat-option>
-                <mat-option value="1">Con Payjoy</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <!-- MODELO -->
-    <div class="col-12 col-md-9 order-1 order-md-2 ">
-        <mat-form-field class="w-100 " appearance="fill" (keyup)="filtro()">
-            <mat-label>Ingrese el Modelo</mat-label>
-            <input matInput placeholder="Modelo " [(ngModel)]="valorModelo">
-        </mat-form-field>
-    </div>
-    <!-- TASAS -->
-    <div class="col-6 order-2 order-md-3 ">
-        <mat-form-field appearance="fill" style="width: 100%; ">
-            <mat-label>Tasas</mat-label>
-            <mat-select [value]="valorTasas">
-                <mat-option value="0 " (click)="filtroTasa(0) "> De contado </mat-option>
-                <mat-option value="12 " (click)="filtroTasa(12) ">12 Meses</mat-option>
-                <mat-option value="18 " (click)="filtroTasa(18) ">18 Meses</mat-option>
-                <mat-option value="24 " (click)="filtroTasa(24) ">24 Meses</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <!-- MARCA -->
-    <div class="col-12 col-sm-6 order-4 ">
-        <mat-form-field appearance="fill" style="width: 100%; ">
-            <mat-label>Marca</mat-label>
-            <mat-select [value]="valorMarcas">
-                <mat-option value="Todas" (click)="obtenerMarca('Todas')">
-                    Todas
-                </mat-option>
-                <mat-option *ngFor="let marca of marcas" [value]="marca" (click)="obtenerMarca(marca)">
-                    {{marca}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <!-- GASTO MAXIMO -->
-    <div class="col-12 order-5 mb-2 ">
-        <div class="row justify-content-md-between justify-content-end align-items-center ">
-            <div class="col-12 col-md-5 ">
-                <mat-label class="mx-2 text-muted ">Gasto máximo: {{valorGastoMaximo | currency:'MXN': 'symbol-narrow' : '1.0-0'}}</mat-label>
-                <mat-slider thumbLabel class="w-100 " [displayWith]="formatLabel " tickInterval="1000 " step="1000 " min="0 " [value]="valorGastoMaximo" max="25000 " aria-label="units " (change)="obtenerGastoMaximo($event.value)"></mat-slider>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Filtros:
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-6 col-md-3 order-2 order-md-1">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Payjoy</mat-label>
+                    <mat-select value=0>
+                        <mat-option value="0">Todos</mat-option>
+                        <mat-option value="1">Con Payjoy</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            <div class="col-8 col-md-3 ">
-                <button class="btn btn-dark w-100 btn-sm ">Limpiar Filtros</button>
+            <!-- MODELO -->
+            <div class="col-12 col-md-9 order-1 order-md-2 ">
+                <mat-form-field class="w-100 " appearance="fill" (keyup)="filtro()">
+                    <mat-label>Ingrese el Modelo</mat-label>
+                    <input matInput placeholder="Modelo " [(ngModel)]="valorModelo">
+                </mat-form-field>
+            </div>
+            <!-- TASAS -->
+            <div class="col-6 order-2 order-md-3 ">
+                <mat-form-field appearance="fill" style="width: 100%; ">
+                    <mat-label>Tasas</mat-label>
+                    <mat-select [value]="valorTasas">
+                        <mat-option value="0 " (click)="filtroTasa(0) "> De contado </mat-option>
+                        <mat-option value="12 " (click)="filtroTasa(12) ">12 Meses</mat-option>
+                        <mat-option value="18 " (click)="filtroTasa(18) ">18 Meses</mat-option>
+                        <mat-option value="24 " (click)="filtroTasa(24) ">24 Meses</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- MARCA -->
+            <div class="col-12 col-sm-6 order-4 ">
+                <mat-form-field appearance="fill" style="width: 100%; ">
+                    <mat-label>Marca</mat-label>
+                    <mat-select [value]="valorMarcas">
+                        <mat-option value="Todas" (click)="obtenerMarca('Todas')">
+                            Todas
+                        </mat-option>
+                        <mat-option *ngFor="let marca of marcas" [value]="marca" (click)="obtenerMarca(marca)">
+                            {{marca}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- GASTO MAXIMO -->
+            <div class="col-12 order-5 mb-2 ">
+                <div class="row justify-content-md-between justify-content-end align-items-center ">
+                    <div class="col-12 col-md-5 ">
+                        <mat-label class="mx-2 text-muted ">Gasto máximo: {{valorGastoMaximo | currency:'MXN': 'symbol-narrow' : '1.0-0'}}</mat-label>
+                        <mat-slider thumbLabel class="w-100 " [displayWith]="formatLabel " tickInterval="1000 " step="1000 " min="0 " [value]="valorGastoMaximo" max="25000 " aria-label="units " (change)="obtenerGastoMaximo($event.value)"></mat-slider>
+                    </div>
+                    <div class="col-8 col-md-3 ">
+                        <button class="btn btn-dark w-100 btn-sm ">Limpiar Filtros</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </mat-expansion-panel>
+</mat-accordion>
 <hr>
 <div class="row mx-1 mt-2 bg-white ">
     <div class="col-12 card text-center py-3 mt-2 text-muted " *ngIf="this.data.length==0 ">
