@@ -25,6 +25,7 @@ import { CargarPromModule } from './cargar-prom/cargar-prom.module';
 import { CargaComModule } from './carga-com/carga-com.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarAdminComponent } from './cargar-prom/shared/navbar-admin/navbar-admin.component';
 
 
 
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     LoginComponent,
+    
   ],
   imports: [
     BrowserModule,

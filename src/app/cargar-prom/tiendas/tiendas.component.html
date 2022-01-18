@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="row align-items-center">
+        <div class="col-7 colpadre">
+            <input type="file" class="custom-file-input" (change)='obtenerArchivo($event)' id="customFile">
+            <img src="assets/folder2.png" alt="" class="img-fluid">
+        </div>
+        <div class="col-5">
+            <div class="row pe-2">
+                <div class="col">
+                    <p class="h1 text-muted" style="letter-spacing: 3px;">Tiendas</p>
+                    <hr>
+                </div>
+            </div>
+            <div class="row pe-3">
+                <div class="col" *ngIf="nombreDocumento.length == 0">
+                    <p class="lead" *ngIf="!error && !loading">
+                        <mat-icon class="text-muted" style="vertical-align: text-bottom !important;">arrow_back_ios</mat-icon>
+                        Ingrese por favor el documento...
+                    </p>
+                    <p class="lead" *ngIf="!error && loading">
+                        <mat-spinner [diameter]="25" class="d-inline-block me-2"></mat-spinner>
+                        Leyendo documento, espere..
+                    </p>
+                    <p class="lead text-danger" *ngIf="error">
+                        <mat-icon class="text-muted" style="vertical-align: text-bottom !important;">arrow_back_ios</mat-icon>
+                        Error, el documento no es valido. Intentarlo de nuevo.
+                    </p>
+                </div>
+                <div class="col" *ngIf="nombreDocumento.length>0">
+                    <p class="lead" *ngIf="!status">
+                        - El documento {{nombreDocumento}} ha sido leído correctamente. <small class="text-muted">Número de filas: [ {{numeroLineas}} ].</small>
+                    </p>
+                    <p class="lead text-success" *ngIf="status">
+                        - La información ha sido guardada exitosamente.
+                    </p>
+                </div>
+            </div>
+            <div class="row pe-3 mt-3">
+                <div class="col">
+                    <button class="btn btn-danger w-100" (click)="statusInfo()" [disabled]="nombreDocumento.length==0">Cargar data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
