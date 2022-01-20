@@ -16,28 +16,32 @@
         </div>
     </div>
     <div class="row mt-3" *ngIf="nombreDocumento.length==0">
-        <div class="col text-center lead" *ngIf="!error">
-            Ingrese el documento, por favor...
-        </div>
-        <div *ngIf="error" class="text-danger lead">
-            El documento que usted ha subido, no es valido.
-        </div>
+        <p class="lead" *ngIf="!error && !loading">
+            Ingrese por favor el documento...
+        </p>
+        <p class="lead" *ngIf="!error && loading">
+            <mat-spinner [diameter]="25" class="d-inline-block me-2"></mat-spinner>
+            Leyendo documento, espere..
+        </p>
+        <p class="lead text-danger" *ngIf="error">
+            Error, el documento no es valido. Intentarlo de nuevo.
+        </p>
     </div>
     <div class="row mt-3" *ngIf="nombreDocumento.length>0">
-        <div class="col-12 lead">
-            <b>Nombre Documento: </b>{{nombreDocumento}}
-        </div>
-        <div class="col-12 lead">
-            <b>Promociones:</b> {{numeroPromociones}}
-        </div>
-        <div class="col-12 lead">
+        <div class="col-12">
             <b>Status: </b>
             <p class="badge" [ngClass]="badgeClass()">{{statusTexto}}</p>
         </div>
+        <div class="col-12">
+            <b>Cantidad de promociones: </b>{{numeroPromociones}}
+        </div>
+        <hr class="my-1">
     </div>
     <div class="row mt-2" *ngIf="nombreDocumento.length>0">
         <div class="col ">
-            <button class="btn btn-danger w-100" (click)="cargarData()">Cargar data</button>
+            <button class="btn btn-danger w-100" (click)="cargarData()" [disabled]="datacargada">
+                {{txt_boton_carga}}
+            </button>
         </div>
     </div>
 </div>

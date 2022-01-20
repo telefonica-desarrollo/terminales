@@ -15,7 +15,7 @@ export class InventarioComponent implements OnInit {
   loading: boolean = false;
   numeroLineas: number = 0;
 
-  constructor() { }
+  constructor() { } 
 
   ngOnInit(): void {
   }

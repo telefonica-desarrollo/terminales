@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Exceljs from "exceljs"
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-promociones-pospago',
@@ -7,18 +8,26 @@ import * as Exceljs from "exceljs"
   styleUrls: ['./promociones-pospago.component.css']
 })
 export class PromocionesPospagoComponent implements OnInit {
-
   nombreDocumento: string = ""
   numeroPromociones: number = 0
+  PromocionesPospago: any = []
+
   error: boolean = false;
+  loading: boolean = false;
+
+  datacargada: boolean = false;
+  txt_boton_carga: string = "Guardar"
+
   statusTexto: string = "Documento Leído"
   status: number = 0;
 
-  constructor() { }
+  constructor(private be_service: BackendService) { }
 
   ngOnInit(): void {
   }
   obtenerArchivo(event: any){
+    this.loading = true
+
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -28,34 +37,54 @@ export class PromocionesPospagoComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("PROMOCOIONES ENERO");
+        var woorksheet = woorkbook.getWorksheet("PROMOCIONES");
         this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
-          if(rowNumber>4){
-            const nombre = row.getCell(1).value;
-            const apellido = row.getCell(2).value;
-            console.log({nombre, apellido});
+          if(rowNumber>7){
+            let promocion: any={}
+            promocion.SKU= row.getCell(5).value;
+            promocion.PVP= row.getCell(8).value;
+            promocion.DESCUENTO = row.getCell(12).value
+            promocion.FECHA_INICIO = row.getCell(13).value
+            promocion.FECHA_FINAL = row.getCell(14).value
+            this.PromocionesPospago.push(promocion)
             this.numeroPromociones++
           }
         })
       }).catch(()=> {
         this.error= true 
         this.nombreDocumento=""
+      }).then(() => {
+        console.log(this.PromocionesPospago);
       })
 
     }
     
     
   }
-  badgeClass(){
+  badgeClass(): string{
     if(this.status == 0) return "bg-secondary"
     if(this.status == 1) return "bg-success"
     if(this.status == 2) return "bg-danger"
     return ""
   }
-  cargarData(){
-    this.status=1 
-    this.statusTexto = "Carga Exitosa"
-  }
+  async cargarData(){
+    this.txt_boton_carga="Guardando"
+    
+    await this.be_service.eliminarPromocionPospago().subscribe(()=> {});
+    let i=0;
+    await this.PromocionesPospago.forEach((promocion: any) =>{
+      this.be_service.agregarPromocionPospago(promocion).subscribe((data) => {
+        console.log(data);
+        i++
 
+        if(i == this.PromocionesPospago.length){
+          this.status=1 
+          this.statusTexto = "Carga exitosa."
+          this.datacargada = true;
+        }
+      })
+    })
+  
+  }
 }

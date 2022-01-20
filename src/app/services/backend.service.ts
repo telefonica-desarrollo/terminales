@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of} from 'rxjs';
+import { tap} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
+
+  promocionesPrepago: boolean = true;
 
   private rutaApi: string = "http://localhost:3000"
 
@@ -54,6 +59,15 @@ export class BackendService {
   }
   agregarPromocionRenovacion(data: any){
     return this.http.post(`${this.rutaApi}/agregar/promociones/renovacion`, data)
+  }
+  eliminarPromocionPrepago(){
+    return this.http.delete(`${this.rutaApi}/eliminar/promociones/prepago`)
+  }
+  eliminarPromocionPospago(){
+    return this.http.delete(`${this.rutaApi}/eliminar/promociones/pospago`)
+  }
+  eliminarPromocionRenovacion(){
+    return this.http.delete(`${this.rutaApi}/eliminar/promociones/renovacion`)
   }
 
   //INVENTARIO
