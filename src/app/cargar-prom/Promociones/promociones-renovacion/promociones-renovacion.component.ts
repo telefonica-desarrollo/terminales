@@ -27,7 +27,7 @@ export class PromocionesRenovacionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-obtenerArchivo(event: any){
+  obtenerArchivo(event: any){
     this.loading = true
 
     const file = event.target.files[0];
@@ -39,14 +39,14 @@ obtenerArchivo(event: any){
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("PROMOCIONES");
+        var woorksheet = woorkbook.getWorksheet("PROMOS ENERO");
         this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
           if(rowNumber>7){
             let promocion: any={}
-            promocion.SKU= row.getCell(5).value;
-            promocion.PVP= row.getCell(8).value;
-            promocion.DESCUENTO = row.getCell(12).value
+            promocion.SKU= row.getCell(4).value;
+            promocion.PVP= row.getCell(7).value;
+            promocion.DESCUENTO = row.getCell(10).result == null ? row.getCell(10).value : row.getCell(10).result
             promocion.FECHA_INICIO = row.getCell(13).value
             promocion.FECHA_FINAL = row.getCell(14).value
             this.PromocionesRenovacion.push(promocion)
@@ -73,10 +73,10 @@ obtenerArchivo(event: any){
   async cargarData(){
     this.txt_boton_carga="Guardando"
     
-    await this.be_service.eliminarPromocionPrepago().subscribe(()=> {});
+    await this.be_service.eliminarPromocionRenovacion().subscribe(()=> {});
     let i=0;
     await this.PromocionesRenovacion.forEach((promocion: any) =>{
-      this.be_service.agregarPromocionPrepago(promocion).subscribe((data) => {
+      this.be_service.agregarPromocionRenovacion(promocion).subscribe((data) => {
         console.log(data);
         i++
 

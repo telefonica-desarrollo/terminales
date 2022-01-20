@@ -37,14 +37,14 @@ export class PromocionesPospagoComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("PROMOCIONES");
+        var woorksheet = woorkbook.getWorksheet("PROMOCIONES ENERO");
         this.nombreDocumento = file.name
         woorksheet.eachRow((row, rowNumber) => {
-          if(rowNumber>7){
+          if(rowNumber>4){
             let promocion: any={}
-            promocion.SKU= row.getCell(5).value;
-            promocion.PVP= row.getCell(8).value;
-            promocion.DESCUENTO = row.getCell(12).value
+            promocion.SKU= row.getCell(4).value;
+            promocion.PVP= row.getCell(7).value;
+            promocion.DESCUENTO = row.getCell(10).result
             promocion.FECHA_INICIO = row.getCell(13).value
             promocion.FECHA_FINAL = row.getCell(14).value
             this.PromocionesPospago.push(promocion)
