@@ -14,6 +14,7 @@ export class TerminalesComponent implements OnInit {
   guardar: boolean = false;
   error: boolean = false;
 
+  terminales: any = []
 
   constructor(private be_service: BackendService) { }
 
@@ -31,26 +32,34 @@ export class TerminalesComponent implements OnInit {
       let woorkbook = new Exceljs.Workbook();
       
       woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet("HOJA1");
+        var woorksheet = woorkbook.getWorksheet("Hoja1");
         woorksheet.eachRow((row, rowNumber) => {
           if(rowNumber>1){
             let terminal: any={}
             terminal.SKU = row.getCell(1).value
             terminal.MARCA = row.getCell(2).value
             terminal.MODELO = row.getCell(3).value
+            this.terminales.push(terminal)
           }
         })
       }).catch(()=> {
         this.error = true;
       }).then(()=>{
         this.guardar= true;
+        console.log(this.terminales);
+        
       })
     }
     
     
   }
   cargarData(){
-    
+    let i=0;
+    this.terminales.forEach((terminal: any)=> {
+      this.be_service.agregarTerminales(terminal).subscribe((data)=>{
+        i++
+      })
+    })
   
   }
 
