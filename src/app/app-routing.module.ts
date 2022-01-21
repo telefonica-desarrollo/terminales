@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { PagePrincipalComponent } from './cargar-prom/page-principal/page-principal.component';
 import { PagePrincipalComComponent } from './carga-com/page-principal-com/page-principal-com.component';
 import { TiendasComponent } from './cargar-prom/tiendas/tiendas.component';
+import { TerminalesComponent } from './cargar-prom/terminales/terminales.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: "cargar", component: PagePrincipalComponent},
   {path: "cargar/tiendas", component: TiendasComponent},
   {path: "cargar/comisiones", component: PagePrincipalComComponent},
+  {path: "cargar/catalogos", component: TerminalesComponent},
   
   {path: "**", redirectTo: "login"}
 ];

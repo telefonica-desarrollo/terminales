@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Exceljs from "exceljs"
+import * as Exceljs from "exceljs" 
 import { BackendService } from 'src/app/services/backend.service';
 
 @Component({

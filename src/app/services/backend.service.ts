@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of} from 'rxjs';
-import { tap} from 'rxjs/operators';
+import { map, tap} from 'rxjs/operators';
+import { Tienda } from '../interface/modelos.interface';
 
 
 @Injectable({
@@ -26,11 +27,51 @@ export class BackendService {
   }
 
   //TIENDAS
-  obtenerTiendas(){
-    return this.http.get(`${this.rutaApi}/obtener/tiendas`)
+  obtenerTiendas(): Observable<Tienda[]>{
+    return this.http.get(`${this.rutaApi}/obtener/tiendas`).pipe(
+      map((data: any)=> {
+        let tiendas: Tienda [] = [];
+        data.forEach((tienda_BD: any) => {
+          let tienda: Tienda = {
+            TERRITORIO: "",
+            REGION: "",
+            SUBDIRECTOR_REGIONAL: "",
+            SUBDIRECTOR_TERRITORIAL: "",
+            LIDER_INTERNO: "",
+            LIDER_SOCIO_COMERCIAL: "",
+            STAFF: "",
+            IDPDV: "",
+            TIENDA: "",
+            SOCIO_COMERCIAL: "",
+            SAP: "",
+            STATUS: 0,
+            // ID_TIENDA: 0
+          }
+          tienda.IDPDV = tienda_BD.Idpdv,
+          tienda.TERRITORIO = tienda_BD.Territorio,
+          tienda.REGION = tienda_BD.Region, 
+          tienda.SUBDIRECTOR_REGIONAL = tienda_BD.Subdirector_Regional, 
+          tienda.SUBDIRECTOR_TERRITORIAL = tienda_BD.Subdirector_Territorial, 
+          tienda.LIDER_INTERNO = tienda_BD.Lider_Interno, 
+          tienda.LIDER_SOCIO_COMERCIAL = tienda_BD.Lider_Socio_Comercial, 
+          tienda.STAFF = tienda_BD.Staff, 
+          tienda.TIENDA = tienda_BD.Nombre_Tienda, 
+          tienda.SOCIO_COMERCIAL = tienda_BD.Socio_Comercial, 
+          tienda.SAP = tienda_BD.Sap,
+          tienda.STATUS = tienda_BD.Status,
+          tienda.ID_TIENDA = tienda_BD.Id_Tienda
+          tiendas.push(tienda)
+        })
+
+        return tiendas;
+      })
+    ) //Mapear las tiendas
   }
   agregarTienda(data: any){
-    return this.http.post(`${this.rutaApi}/login`, data)
+    return this.http.post(`${this.rutaApi}/agregar/tienda`, data)
+  }
+  modificarTienda(data: any){
+    return this.http.post(`${this.rutaApi}/modificar/tienda`, data)
   }
 
   //TERMINALES

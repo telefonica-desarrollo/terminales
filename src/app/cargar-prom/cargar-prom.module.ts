@@ -9,6 +9,8 @@ import { InventarioComponent } from './inventario/inventario.component';
 import { RouterModule } from '@angular/router';
 import { TiendasComponent } from './tiendas/tiendas.component';
 import { NavbarAdminComponent } from './shared/navbar-admin/navbar-admin.component';
+import { TerminalesComponent } from './terminales/terminales.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 
@@ -21,6 +23,11 @@ import { NavbarAdminComponent } from './shared/navbar-admin/navbar-admin.compone
     PromocionesRenovacionComponent,
     InventarioComponent,
     TiendasComponent,
+    NavbarAdminComponent,
+    TerminalesComponent,
+    UsuariosComponent
+  ],
+  exports: [
     NavbarAdminComponent
   ],
   imports: [

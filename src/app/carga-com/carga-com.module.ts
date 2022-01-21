@@ -4,6 +4,7 @@ import {DocAltasComponent} from "./doc-altas/doc-altas.component"
 import {PagePrincipalComComponent} from "./page-principal-com/page-principal-com.component"
 import { AngMaterialModule } from '../ang-material-module/ang-material.module';
 import { RouterModule } from '@angular/router';
+import { CargarPromModule } from '../cargar-prom/cargar-prom.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     AngMaterialModule,
-    RouterModule
+    RouterModule,
+    CargarPromModule
   ]
 })
 export class CargaComModule { }

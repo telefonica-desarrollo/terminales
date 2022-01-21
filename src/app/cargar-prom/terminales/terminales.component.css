@@ -1,0 +1,14 @@
+.design-title {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+hr {
+    background-color: white;
+}
+
+.fondo {
+    margin-top: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(180deg, #0e1a30 0%, #1D3461 30%);
+}

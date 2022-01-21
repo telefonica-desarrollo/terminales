@@ -20,13 +20,20 @@ export interface Promociones {
 
 //Interfaces
 export interface tienda {
-    ID_TIENDA: string;
-    SAP: string;
-    TIENDA: string;
-    REGION: string;
     TERRITORIO: string;
-    IDPDV: string;
+    REGION: string;
+    SUBDIRECTOR_REGIONAL: string
+    SUBDIRECTOR_TERRITOTIAL: string
+    LIDER_INTERNO: string
+    LIDER_SOCIO_COMERCIAL: string,
+    STAFF: string,
+    IDPDV: string,
+    TIENDA: string,
+    SOCIO_COMERCIAL: string,
+    SAP: string,
+    STATUS: string,
 }
+
 export interface Promocion {
     MARCA: string;
     PRECIO_INICIAL: number;

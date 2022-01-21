@@ -1,0 +1,19 @@
+<div class="fondo">
+    <div class="container pb-3">
+        <app-navbar-admin></app-navbar-admin>
+
+        <div class="row px-2">
+            <div class="col-6 card p-5">
+                <input type="file" (change)="obtenerArchivo($event)" class="mb-3">
+                <div *ngIf="loading">
+                    Cargando
+                </div>
+                <button class="btn btn-danger" [disabled]="!error && !guardar">Guardar</button>
+            </div>
+            <div class="col-5">
+
+            </div>
+        </div>
+
+    </div>
+</div>

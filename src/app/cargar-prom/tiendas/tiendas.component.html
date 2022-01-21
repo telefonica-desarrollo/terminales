@@ -3,29 +3,37 @@
         <app-navbar-admin></app-navbar-admin>
 
         <div class="row px-2 justify-content-between">
-            <div class="col-3 card text-white" style="background-color: rgba(0, 0, 0, 0.4);">
-                <div class="card-title mt-2">
+            <div class="col-2 card text-white" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="card-title mt-2 ">
                     Pdvs:
                 </div>
                 <div class="card-body text-center" style="font-size: 50px; font-weight: lighter;">
-                    134
+                    {{tiendasBD.length}}
                 </div>
             </div>
-            <div class="col-3 card text-white" style="background-color: rgba(0, 0, 0, 0.4);">
-                <div class="card-title mt-2">
-                    Usuarios:
+            <div class="col-2 card text-white" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="card-title mt-2 ">
+                    Temm:
                 </div>
                 <div class="card-body text-center" style="font-size: 50px; font-weight: lighter;">
-                    700
+                    {{cantidadTiendas_Temm}}
+                </div>
+            </div>
+            <div class="col-2 card text-white" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="card-title mt-2 ">
+                    Teknei:
+                </div>
+                <div class="card-body text-center" style="font-size: 50px; font-weight: lighter;">
+                    {{cantidadTiendas_Teknei}}
                 </div>
             </div>
             <div class="col-5 card bg-cp">
                 <div class="card-title mt-2">
-                    <b>Actualzar Pdvs:</b>
+                    Actualzar Pdvs:
                 </div>
                 <div class="card-body">
                     <div class="colpadre btn w-100 d-flex justify-content-center">
-                        <input type="file" class="custom-file-input">
+                        <input type="file" class="custom-file-input" (change)="obtenerArchivo($event)">
                         <mat-icon class="mx-2">folder</mat-icon>
                         <div>
                             Ingresar directorio de tiendas
@@ -34,15 +42,86 @@
                 </div>
             </div>
         </div>
-        <div class="row px-2 justify-content-end">
+        <div class="row px-2 justify-content-end" [@mostrar]="showRow ? 'true' : 'false' ">
             <div class="col-5 card bg-cp">
                 <div class="card-body">
-                    <button class="btn btn-danger w-100 d-flex justify-content-center">
+                    <p class="lead" *ngIf="!error && loading">
+                        <mat-spinner [diameter]="25" class="d-inline-block me-2"></mat-spinner>
+                        Leyendo documento, espere..
+                    </p>
+                    <p class="lead text-success" *ngIf="!error && !loading">
+                        Documento leído con exito.
+                    </p>
+                    <div *ngIf="statusEnviar">[ {{tiendasActualizadas}} de {{tiendas.length}} ]</div>
+                    <p class="lead text-danger" *ngIf="error">
+                        Error, el documento no es valido. Intentarlo de nuevo.
+                    </p>
+
+                    <button class="btn btn-danger w-100 d-flex justify-content-center mt-4" [disabled]="error || loading" (click)="Guardar()">
                         <mat-icon class="mx-2">upload</mat-icon>
                         <div>
-                            Actualizar Pdvs
+                            {{textoBoton}}
                         </div>
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="row px-2 gx-2 justify-content-between mt-4">
+            <div class="col-7 card bg-cp">
+                <div class="card-title mt-2 mx-2">
+                    Pdvs:
+                </div>
+
+                <div class="card-body" *ngIf="tiendasBD.length > 0">
+                    <button class="w-100 d-flex align-items-center rounded px-0 border-1 mb-1 btntienda" *ngFor="let tienda of tiendasBD" (click)="tiendaSeleccionada = tienda">
+                        <div style="background-color: rgba(0, 0, 0, 0.4);" class="px-2 me-3">
+                            <mat-icon>home</mat-icon> 
+                        </div>
+                        <div>
+                            {{tienda.TIENDA}}
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="col-4 card bg-cp align-self-start">
+                <div class="card-title mt-2 mx-2">
+                    Informacion Pdv:
+                </div>
+                <div class="card-body" *ngIf="tiendaSeleccionada.TIENDA">
+                    <dl class="row">
+                        <dt class="col-sm-3">PDV</dt>
+                        <dd class="col-sm-9">{{tiendaSeleccionada.TIENDA}}</dd>
+                        <dt class="col-sm-3">Idpdv</dt>
+                        <dd class="col-sm-9">{{tiendaSeleccionada.IDPDV}}</dd>
+
+
+                        <dt class="col-sm-3">Territorio</dt>
+                        <dd class="col-sm-4">{{tiendaSeleccionada.TERRITORIO}}</dd>
+
+                        <dt class="col-sm-3">Region</dt>
+                        <dd class="col-sm-2">{{tiendaSeleccionada.REGION}}</dd>
+
+
+                        <dt class="col-sm-3">Staff</dt>
+                        <dd class="col-sm-3">{{tiendaSeleccionada.STAFF}}</dd>
+
+                        <dt class="col-sm-3">Sap</dt>
+                        <dd class="col-sm-3">{{tiendaSeleccionada.SAP}}</dd>
+
+
+                        <dt class="col-sm-12">Subdirector Regional</dt>
+                        <dd class="col-sm-12">{{tiendaSeleccionada.SUBDIRECTOR_REGIONAL}}</dd>
+
+                        <dt class="col-sm-12">Subdirector Territorial</dt>
+                        <dd class="col-sm-12">{{tiendaSeleccionada.SUBDIRECTOR_TERRITORIAL}}</dd>
+
+                        <dt class="col-sm-4">Lider Interno</dt>
+                        <dd class="col-sm-8">{{tiendaSeleccionada.LIDER_INTERNO}}</dd>
+
+
+
+                    </dl>
+                    <!-- {{tiendaSeleccionada | json}} -->
                 </div>
             </div>
         </div>

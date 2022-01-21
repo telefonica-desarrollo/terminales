@@ -24,3 +24,13 @@
     background-color: #0e1a30;
     color: white;
 }
+
+.btntienda:hover {
+    background-color: #1D3461;
+    color: white
+}
+
+.btntienda:focus {
+    background-color: #1D3461;
+    color: white
+}
