@@ -10,7 +10,9 @@ import { BackendService } from 'src/app/services/backend.service';
 export class PromocionesPospagoComponent implements OnInit {
   nombreDocumento: string = ""
   numeroPromociones: number = 0
+
   PromocionesPospago: any = []
+  catalogoTerminales: any = []
 
   error: boolean = false;
   loading: boolean = false;
@@ -21,7 +23,11 @@ export class PromocionesPospagoComponent implements OnInit {
   statusTexto: string = "Documento Leído"
   status: number = 0;
 
-  constructor(private be_service: BackendService) { }
+  constructor(private be_service: BackendService) { 
+    this.be_service.obtenerTerminales().subscribe((data)=>{
+      this.catalogoTerminales = data;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -72,8 +78,19 @@ export class PromocionesPospagoComponent implements OnInit {
     this.txt_boton_carga="Guardando"
     
     await this.be_service.eliminarPromocionPospago().subscribe(()=> {});
+
     let i=0;
     await this.PromocionesPospago.forEach((promocion: any) =>{
+      let skuEntontrado = false
+      this.catalogoTerminales.forEach((terminal:any) => {
+        if(promocion.SKU == terminal.Sku){
+          promocion.ID_TERMINAL = terminal.Id_Terminal
+          skuEntontrado = true;
+        }
+      })
+
+      if(!skuEntontrado) console.log("No encontramos SKU");
+
       this.be_service.agregarPromocionPospago(promocion).subscribe((data) => {
         console.log(data);
         i++

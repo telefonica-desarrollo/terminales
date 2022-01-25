@@ -118,9 +118,9 @@ export class BackendService {
   obtenerInventario(data: any){
     return this.http.post(`${this.rutaApi}/obtener/inventario`, data)
   }
+  eliminarInventario(){
+    return this.http.delete(`${this.rutaApi}/eliminar/inventario`)
+  }
   
-
-
-
   
 }

@@ -11,6 +11,8 @@ export class PromocionesRenovacionComponent implements OnInit {
   nombreDocumento: string = ""
   numeroPromociones: number = 0
   PromocionesRenovacion: any = []
+  catalogoTerminales: any = []
+
 
   error: boolean = false;
   loading: boolean = false;
@@ -22,7 +24,11 @@ export class PromocionesRenovacionComponent implements OnInit {
   status: number = 0;
 
 
-  constructor(private be_service: BackendService) { }
+  constructor(private be_service: BackendService) {
+    this.be_service.obtenerTerminales().subscribe((data)=>{
+      this.catalogoTerminales = data;
+    })
+   }
   
 
   ngOnInit(): void {
@@ -76,6 +82,16 @@ export class PromocionesRenovacionComponent implements OnInit {
     await this.be_service.eliminarPromocionRenovacion().subscribe(()=> {});
     let i=0;
     await this.PromocionesRenovacion.forEach((promocion: any) =>{
+      let skuEntontrado = false
+      this.catalogoTerminales.forEach((terminal:any) => {
+        if(promocion.SKU == terminal.Sku){
+          promocion.ID_TERMINAL = terminal.Id_Terminal
+          skuEntontrado = true;
+        }
+      })
+
+      if(!skuEntontrado) console.log("No encontramos SKU");
+      
       this.be_service.agregarPromocionRenovacion(promocion).subscribe((data) => {
         console.log(data);
         i++

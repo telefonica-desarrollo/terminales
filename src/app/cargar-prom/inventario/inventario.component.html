@@ -30,6 +30,9 @@
                     <p class="lead" *ngIf="!status">
                         - El documento {{nombreDocumento}} ha sido leído correctamente. <small class="text-muted">Número de filas: [ {{numeroLineas}} ].</small>
                     </p>
+                    <p *ngIf="!status">
+                        [ {{lineasSubidas}} | {{numeroLineas}}]
+                    </p>
                     <p class="lead text-success" *ngIf="status">
                         - La información ha sido guardada exitosamente.
                     </p>

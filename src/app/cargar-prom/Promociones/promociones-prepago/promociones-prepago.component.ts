@@ -11,6 +11,8 @@ export class PromocionesPrepagoComponent implements OnInit {
   nombreDocumento: string = ""
   numeroPromociones: number = 0
   PromocionesPrepago: any = []
+  catalogoTerminales: any = []
+
 
   error: boolean = false;
   loading: boolean = false;
@@ -21,7 +23,11 @@ export class PromocionesPrepagoComponent implements OnInit {
   statusTexto: string = "Documento Leído"
   status: number = 0;
 
-  constructor(private be_service: BackendService) { }
+  constructor(private be_service: BackendService) { 
+    this.be_service.obtenerTerminales().subscribe((data)=>{
+      this.catalogoTerminales = data;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -74,6 +80,16 @@ export class PromocionesPrepagoComponent implements OnInit {
     await this.be_service.eliminarPromocionPrepago().subscribe(()=> {});
     let i=0;
     await this.PromocionesPrepago.forEach((promocion: any) =>{
+      let skuEntontrado = false
+      this.catalogoTerminales.forEach((terminal:any) => {
+        if(promocion.SKU == terminal.Sku){
+          promocion.ID_TERMINAL = terminal.Id_Terminal
+          skuEntontrado = true;
+        }
+      })
+
+      if(!skuEntontrado) console.log("No encontramos SKU");
+      
       this.be_service.agregarPromocionPrepago(promocion).subscribe((data) => {
         console.log(data);
         i++
